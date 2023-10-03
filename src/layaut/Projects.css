@@ -1,0 +1,27 @@
+.body_Projects{
+    margin-top: 30px;
+}
+table{
+    border-bottom: none;
+}
+.col1Header{
+    width: 50px;
+    text-align: center;
+}
+
+.col1{
+    cursor: pointer;
+    width: 50px;
+    color: #fff;
+    text-align: center;
+}
+.link_proj{
+    text-decoration: none;
+}
+.img_projTable{
+    width: 40px;
+    border-radius: 5px;
+}
+.lastColl{
+    width: 25%;
+}

@@ -1,0 +1,95 @@
+.bodyModalAddAssigneds{
+    display: none;
+    position: absolute;
+    bottom: -50%;
+    right: 180px;
+}
+.bodyModalAddAssignedsActive{
+    display: block;
+}
+/* .bodyModalAddAssigneds::after{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-left: 30px solid rgb(255, 255, 255);
+    border-bottom: 20px solid transparent;
+    top: calc(25vh - 60%);
+    filter: drop-shadow(0px 0px 15px rgba(255, 255, 255, 0.3));
+    right: -28px;
+} */
+.assignedsColumn{
+    /* overflow: hidden; */
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    background-color: rgb(255, 255, 255);
+    width: 45vw;
+    height: 25vh;
+    border-radius: 10px;
+    padding: 20px;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 15px #000;
+}
+.allAssigneds{
+    height: calc(25vh - 50px);
+    margin-right: 10px;
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    border: 1px solid rgb(184, 184, 184);
+    overflow-y: auto;
+    border-radius: 10px;
+}
+.selectedAssigned{
+    height: calc(25vh - 50px);
+    padding: 5px;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 80% 20%;
+    border: 1px solid rgb(184, 184, 184);
+    border-radius: 10px;
+}
+.actionModalAsign{
+    display: flex;
+}
+.actionModalAsign button{
+    flex-grow: 1;
+    border-radius: 10px;
+    border: 1px solid rgb(0, 57, 227);
+}
+.actionModalAsign button:first-child{
+    margin-right: 5px;
+}
+.actionModalAsign button:last-child{
+    margin-left: 5px;
+    background-color: rgba(0, 81, 255, 0.733);
+    color: #fff;
+}
+.actionModalAsign button:first-child:hover{
+    background-color: #d8e7ff;
+    cursor: pointer;
+}
+.actionModalAsign button:last-child:hover{
+    background-color: rgba(0, 81, 255, 0.632);
+    cursor: pointer;
+}
+.addAssign{
+    text-align: center;
+    align-items: end;
+    font-size: 26px;
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    display: block;
+    background-color: rgba(191, 95, 255, 0.357);;
+    border-radius: 10px;
+}
+.allSelectAsign{
+    /* height: 154px; */
+    overflow-y: auto;
+}
+.assignedAdd{
+    display: flex;
+    align-items: center;
+}

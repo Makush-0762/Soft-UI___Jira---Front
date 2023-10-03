@@ -1,0 +1,134 @@
+.sidebar{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    font-size: 14px;
+    padding: 15px;
+    border-right: 1px solid rgba(103, 103, 103, 0.5);
+    background-color: rgb(255, 255, 255);
+    z-index: 0;
+    transition: all 0.5s ease;
+}
+
+.animateSidebar {
+    transform: translateX(-10%);
+    width: calc(100% - 40px); 
+    padding: 5px;
+}
+.svipeDisplayNone{
+    display: none;
+}
+.button_svipe{
+    width: 20px;
+    height: 40px;
+    position: absolute;
+    background-color: rgb(255, 255, 255);
+    top: 100px;
+    right: -10.5px;
+    border-radius: 5px;
+    border: 1px solid rgba(137, 137, 137, 0.5);
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.button_svipePos{
+    right: -16.5px;
+}
+.button_svipe p{
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.icon_svipe{
+    width: 16px;
+    height: 16px;
+}
+
+.bodySidebar{
+    flex: 1 1 auto ;
+}
+.accordion-button::after{
+    content: '';
+    left: 0;
+}
+.accordion-button:not(.collapsed){
+    background-color: transparent;
+    color: black;
+}
+.accordion-button:focus{
+    z-index: 0;
+    border-color: none;
+}
+.ImgProgect{
+    width: 30px;
+    margin-right: 15px;
+}
+.svipeMenuImgProjCenter{
+    margin-right: 0;
+    /* padding-left: 70%; */
+}
+
+.TitleProject,.descriptionProject{
+    margin: 0;
+    font-size: 14px;
+}
+.bodyProjectName{
+    padding: 15px 5px;
+    display: flex;
+}
+.bodyProjectNameNonPad{
+    padding: 15px 0 15px 4px;
+}
+.linkSidebar{
+    color: black;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    padding: 5px;
+} 
+.linkSidebarActive{
+    justify-content: center;
+}
+.list-group{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    flex: 1 1 auto
+}
+.list-group-item:hover{
+    background-color: rgba(103, 146, 255, 0.3);
+    border-radius: 10px;
+}
+.planesSidbar{
+    background-color: rgba(169, 145, 255, 0.179);
+    padding: 10px;
+    border-radius: 5px; 
+}
+.secondPlanesSidbar{
+    margin-bottom: 10px;
+}
+.titleBlock{
+    margin: 0 0 10px 5px;
+}
+.ImgProgectItem{
+    margin-right: 15px;
+    width: 25px;
+}
+.bodyBottomTitle{
+    bottom: 70px;
+    left: 40px;
+    text-align: center;
+}
+.bottomTitle,.bottomLink{
+    margin: 0;
+}
+.svipeMenuImgCenter{
+    margin-right: 0 !important;
+    /* padding-left: 60%; */
+}
+
+.padNon{
+    padding: 0;
+}

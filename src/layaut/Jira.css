@@ -1,0 +1,403 @@
+
+.mainProject{
+    padding: 30px;
+    max-height: 90vh;
+    /* position: relative; */
+}
+.LinkBread{
+    text-decoration: none;
+    color: rgb(122, 122, 122);
+}
+.LinkBread:hover{
+    text-decoration: underline;
+}
+.titleBacklog{
+    font-size: 25px;
+    font-weight: 500;
+    margin: 0;
+}
+.bodyTitle{
+    display: flex;
+    justify-content: space-between;
+}
+.linkTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    background-color: rgb(239, 239, 239);
+    width: 46px;
+    height: 46px;
+    transition: all 0.2s;
+}
+.linkTitle:hover{
+    background-color: rgba(203, 203, 203, 1);
+}
+.inputBacklogr{
+    width: auto;
+    position: relative;
+}
+.idSearchBacklog{
+    width: 233px;
+}
+.magnifierBacklog{
+    position: absolute;
+    left: 170px;
+    top: 5px;
+    padding-left: 5px;
+}
+.inputSearchBacklog{
+    padding: 7px 10px;
+    padding-right: 30px;
+    border: 2px solid rgb(157, 157, 157);
+    border-radius: 7px;
+    transition: all 0.2s;
+}
+.inputSearchBacklog:hover{
+    background-color: rgb(229, 229, 229);
+}
+.imgSearch{
+    border-radius: 50%;
+    position: relative; 
+    width: 28px;
+    margin-right: 15px;
+}
+.epic{
+    display: flex;
+    align-items: center;
+    margin: 0;
+    display: inline-block;
+    width: auto;
+    border-radius: 5px;
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.2s;
+    padding: 5px 15px;
+}
+.epic:hover{
+    background-color: rgb(229, 229, 229);
+}
+.iconEpic{
+    width: 16px;
+    margin-bottom: -4px;
+}
+.statistic{
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 15px;
+    transition: all 0.2s;
+    background-color: rgb(239, 239, 239);
+}
+.statistic:hover{
+    background-color: rgb(214, 214, 214);
+}
+.bodyForm{
+    display: flex;
+}
+.bodyForm-Item:not(:first-child){
+    margin-left: 15px;
+    display: flex;
+    align-items:center;
+}
+.body_Search-Backlog{
+    display: flex;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+.body_Tasks{
+    margin-top: 15px;
+    background-color: rgb(239, 239, 239);
+    border-radius: 10px;
+    height: auto;
+    padding: 15px;
+}
+.right-Block p{
+    margin: 0;
+}
+.sprintTasks{
+    display: inline-block;
+    width: auto;
+    margin: 0;
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 10.5px 15px;
+    transition: all 0.2s;
+    background-color: rgb(217, 217, 217);
+}
+.sprintTasks:hover{
+    background-color: rgb(196, 196, 196);
+}
+.linkTitleTasks{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-left: 25px;
+    background-color: rgb(217, 217, 217);
+    width: 46px;
+    height: 46px;
+    transition: all 0.2s;
+}
+.linkTitleTasks:hover{
+    background-color: rgb(196, 196, 196);
+}
+.grey_Zero,.blue_Zero,.green_Zero{
+    width: 20px;
+    height: 18px;
+    line-height: 1;
+    text-align: center;
+    font-weight: 600;
+    border-radius: 48%;
+}
+.grey_Zero{
+    background-color: rgb(217, 217, 217);
+}
+.blue_Zero{
+    color: #fff;
+    background-color: rgb(28, 3, 255);
+}
+.green_Zero{
+    background-color: rgb(0, 111, 20);
+    color: #fff;
+}
+.bodyTitleTasks{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+.titleTasts{
+    display: flex;
+    align-items:center;
+}
+.right-Block{
+    display: flex;
+    align-items: center;
+}
+.body_Zero{
+    display: flex;
+}
+.body_Zero p{
+    margin-right: 5px;
+}
+.body_Zero p:nth-last-of-type(1){
+    margin-right: 25px;
+}
+.body_task{
+    max-height: 55vh;
+    overflow-y: scroll;
+    overflow-x: scroll;
+}
+.task p{
+    margin: 0;
+}
+.left-BlockTast{
+    display: flex;
+    margin-left: 20px;
+    align-items:center;
+}
+.item-leftBlock:not(:last-child){
+    margin-right: 15px;
+}
+.quintitu{
+    display: flex;
+    justify-content: center;
+    align-items:center;
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background-color: rgb(201, 201, 201);
+}
+.right-BlockTask{
+    display: flex;
+    align-items:center;
+    margin-right: 50px;
+}
+.item-rightBlock:not(:first-child){
+    margin-left: 15px;
+}
+.task{
+    background-color:#fff;
+    padding: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    /* cursor: pointer; */
+    transition: all 0.2s;
+}
+.task:hover{
+    background-color:rgba(122, 122, 122, 0.1)
+}
+.task{
+    border: 1px solid rgb(220, 220, 220);
+    border-bottom: none;
+}
+.task > *{
+    font-size: 13px;
+}
+.imgUpdate{
+    fill: #757575;
+    padding: 2px;
+    width: 20px;
+    transition: all 0.2s;
+}
+.bodyUpdatePencil{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    border-radius: 10px;
+    height: 18px;
+    transition: all 0.2s;
+    width: 27px;
+    background-color: rgba(101, 101, 101, 0.2);
+    cursor: pointer;
+}
+.modalDetails{
+    cursor: pointer;
+    padding: 2px;
+}
+.bodyStatus{
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+    border-radius: 25px;
+    margin-left: 15px;
+    cursor: default;
+}
+.statusBlock{
+    /* background-color: rgba(217, 217, 217, 0.7); */
+    width: 125px;
+    padding: 5px;
+    font-weight: 500;
+    border-radius: 25px;
+    text-align: center;
+}
+.statusPending {
+    background-color: #f8f8f8;
+    border: 1.5px solid #b3b3b3;
+    color: #797979;
+}
+
+.statusInProgress {
+    border: 1.5px solid #ffe839;
+    color: #dec400;
+    background-color: #f8f8f8;
+}
+
+.statusTestTask {
+    background-color: #f8f8f8;
+    border: 1.5px solid #9300ad;
+    color: #de26ff;
+}   
+.statusDone {
+    background-color: #f8f8f8;
+    border: 1.5px solid #39ff9f;
+    color: #00b55d;
+}
+.body_ImgProfile{
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    position: relative;
+}
+.body_ModalAssigned{
+    position: absolute;
+    top: 52px;
+    left: -50px;
+    background-color: rgb(236, 236, 255);
+    width: 200px;
+    border-radius: 10px;
+    padding: 10px;
+    z-index: 1;
+}
+.body_ModalAssigned p {
+    margin: 0;
+}
+.buttonAssigned{
+    background-color: rgba(238, 238, 255, 0.729);
+    padding: 8px 26px;
+    border-radius: 25px;
+    cursor: pointer;
+    position: relative;
+}
+.assigned{
+    display: flex;
+    padding: 5px 15px;
+    transition: all 0.2s ease;
+    /* cursor: pointer; */
+    position: relative;
+}
+.modalArrowUp{
+    position: relative;
+}
+.modalArrowUp::before{
+    position: absolute;
+    content: "";
+    width: 0;
+    height: 0;
+    border-left: 100px solid transparent;
+    border-right: 100px solid transparent;
+    border-bottom: 20px solid rgb(236, 236, 255);
+    top: -30px;
+}
+.assigned:hover{
+    background-color: rgba(208, 208, 255, 0.648);
+    border-radius: 10px;
+}
+.body_assignedAvatar{
+    display: flex;
+    align-items:center
+}
+.body_assignedAvatar,.assignedAvatar{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+.deleteAssign{    
+    text-align: center;
+    align-items: center;
+    font-size: 26px;
+    width: 30px;
+    height: 30px;
+    margin-left: auto;
+    display: block;
+    background-color: rgba(191, 95, 255, 0.357);;
+    border-radius: 10px;
+    cursor: url('../img/cursor_deleteKR.png'), auto;
+}
+.user_delete{
+    width: 24px;
+    height: 24px;
+}
+.assignedAvatar{
+    width: 30px;
+    height: 30px;
+    object-fit: cover;
+}
+.assigned:last-child{
+    padding-left: 10px;
+}
+.assigned_name{
+    display: flex;
+    align-items:center;
+    padding-left: 15px;
+}
+.addAssigned{
+    position: relative;
+    text-align: center;
+    padding: 8px 18px;
+    background-color: rgba(154, 255, 96, 0.345);
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+.addAssigned:hover{
+    background-color: rgba(154, 255, 96, 0.693);
+}
+.assigned:last-child{
+    padding-left: 15px;
+}

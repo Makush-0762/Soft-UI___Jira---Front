@@ -1,0 +1,597 @@
+
+.bodyUpdatePencilActive{
+    display: none;
+}
+.modalBody{
+    grid-template: 7% auto / 60% 40%;
+    display: grid;
+}
+.blockDescription{
+    overflow-y: auto;
+    /* width: 60%; */
+    padding-right: 15px;
+}
+.body_modal{
+    width: 100vw;
+    height: calc(100vh);
+    background-color: rgba(0, 0, 0, 0.439);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
+.body_modal_active{
+    display: flex;
+}
+.modalBody{
+    width: 80vw;
+    height: 70vh;
+    background-color: rgb(248, 248, 248);
+    padding: 20px 30px;
+}
+.blockDescription_idTask{
+    display: flex;
+    align-items: center;
+    /* padding-bottom: 10px; */
+}
+.idTaskModal_input{
+    margin-left: 10px;
+}
+.blockDescription_buttonGroup{
+    display: flex;
+}
+.buttonGroup_itemButton{
+    border:none;
+    border-radius: 3px;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+}
+.buttonGroup_itemButton:hover{
+    background-color: rgba(193, 193, 193, 0.486);
+    cursor: pointer;
+}
+.bodyButton_buttonGroup{
+    position: relative;
+    display: flex;
+}
+.itemButtonDropSpan{
+    width: auto;
+    height: auto;
+}
+.bodyButton_buttonGroup:not(:last-child){
+    margin-right: 15px;
+}
+.buttonGroup_img, .buttonGroup_img1{
+    width: 24px;
+    margin-right: 10px;
+}
+.buttonGroup_img1{
+    margin-right: 0;
+}
+.itemButtonDrop{
+    /* position: relative; */
+    padding-right: 50px;
+}
+.itemButtonDrop:hover{
+    background-color: rgba(193, 193, 193, 0.486);
+    cursor: pointer;
+}
+.itemButtonDropArrow{
+    position: absolute;
+    right: 0;
+    border: none;
+    height: 100%;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-left: 1.5px solid rgba(193, 193, 193, 0.756);
+}
+.itemButtonDropArrow:hover{
+    background-color: rgba(193, 193, 193, 0.486);
+    cursor: pointer;
+}
+.imgDropButton{
+    width: 12px;
+    padding: 8px 8px;
+}
+.dropMenu_buttonGroup{
+    position: absolute;
+    bottom: -110px;
+    padding: 10px 10px;
+    background-color: rgba(241, 241, 241, 0.465);
+    border-radius: 3px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.2);
+    visibility: hidden;
+}
+.activedropMenu{
+    visibility: visible;
+}
+.dropMenuItem{
+    margin: 0;
+    display: flex;
+    align-items: center;
+    padding: 5px 5px;
+    font-size: 14px;
+}
+.img_dropMenu{
+    width: 24px;
+    margin-right: 10px;
+}
+.dropMenuItem:hover{
+    background-color: rgba(193, 193, 193, 0.486);
+    border-radius: 3px;
+    cursor: pointer;
+}
+.addDescriptionTask{
+    margin-top: 25px;
+}
+.bodyField_addDescr:hover{
+    background-color: rgba(193, 193, 193, 0.486);
+    border-radius: 3px;
+    display: block;
+}
+.bodyField_none{
+    display: none;
+}
+.bodyField_show{
+    display: block;
+}
+.addDescr_title, .addDescr_edit{
+    margin: 0;
+}
+.editorBody{
+    width: inherit;
+    display: block;
+}
+.editorBody_hide{
+    display: none;
+}
+.addDescr_title{
+    padding: 10px;
+    font-size: 15px; 
+}
+.addDescr_edit{
+    padding: 10px;
+}
+.bodyBtnEdit{
+    padding-top: 10px;
+}
+.btnEdit{
+    border: none;
+    padding: 10px 15px;
+    background-color:rgb(0, 0, 255);
+    color: #fff;
+    font-weight: 600;
+    border-radius: 3px;
+}
+.btnEdit:hover{
+    background-color:rgba(0, 98, 255, 1);
+    cursor: pointer;
+}
+.btnEdit:last-child{
+    background-color:rgb(255, 255, 255);
+    color: #000000;
+    margin-left: 15px;
+}
+.btnEdit:last-child:hover{
+    background-color: rgba(193, 193, 193, 0.486);
+    cursor: pointer;
+}
+
+
+/* ____________________bodyActivity_________________ */
+.bodyActivity{
+    display: flex;
+    justify-content: space-between;
+}
+.title_Activity{
+    font-size: 15px;
+    display: block;
+}
+.activityShow, .bodyActivityFilt{
+    display: flex;
+    align-items: center;
+}
+.activityFilt_icon{
+    width: 16px;
+}
+.activityFilt{
+    display: flex;
+    align-items: center;
+}
+.title_Activity, .activityShow, .activityFilt{
+    margin: 0;
+}
+.title_Activity{
+    margin: 15px 10px;
+}
+.bodyActivityShow{
+    padding: 0 10px;
+}
+.activityShow_Item{
+    padding: 3px 15px;
+    background-color: rgba(231, 231, 231, 0.464);
+    border-radius: 3px;
+    transition: all 0.2s;
+}
+.activityShow_Item:not(:last-child){
+    margin-right: 10px;
+}
+.activityShow_Item:hover{
+    background-color: rgba(195, 195, 195, 0.659);
+    cursor: pointer;
+}
+.showItem_active{
+    background-color: rgba(195, 195, 195, 0.659);
+}
+.activityFilt_icon{
+    padding-left: 15px; 
+    transition: all 0.2s;
+}
+.activityFilt_icon:hover{
+    transform: scale(1.1);
+}
+.activityFilt{
+    padding: 3px 15px;
+    transition: all 0.2s;
+}
+.activityFilt:hover{
+    background-color: rgba(233, 233, 233, 0.659);
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+/* -------------------------------------------------addComment----------------------- */
+
+.addComment{
+    display: flex;
+    align-items: center;
+    padding: 15px 10px; 
+}
+.addComment_none{
+    display: none;
+}
+.addComment_inputComm{
+    display: flex;
+    flex-grow: 1;
+}
+.addComment_form{
+    display: block;
+    min-width: 95%;
+    padding: 5px 10px;
+}
+.addComment_input{
+    display: block;
+    width: 100%;
+    height: 40px;
+    padding: 5px 10px;
+    font-size: 14px;
+}
+.addComment_label{
+    display: block;
+    padding-top: 10px;
+}
+.imgUser{
+    width: 32px;
+    padding: 10px 20px 10px 10px;
+}
+/* -------------------------------------commentField--------------------------- */
+.commentItem{
+    display: flex;
+    justify-content: start;
+}
+.commentItem:not(:first-child){
+    padding-top: 20px;
+}
+.commentField{
+}
+.commF_userDetails{
+    display: flex;
+    margin: 0;
+}
+.commF_userDetails > .userName{
+    color: rgb(10, 27, 66);
+}
+.commF_userDetails:last-child{
+    margin-left: 15px;
+}
+.commF_comment{
+    margin: 7px 0px;
+}
+.commF_changeComm{
+    display: flex;
+    align-items: center;
+}
+.chanComm_BodyImg{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30px;
+    height: 25px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.chanComm_iconReaction{
+    width: 18px;
+    transition: all 0.3s;
+}
+.chanComm_iconReaction:hover{
+    transform: scale(1.2);
+    cursor: pointer;
+}
+.changeComm_item{
+    color:gray; 
+    font-weight: 500;
+}
+.changeComm_item:not(:last-child):hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+.changeComm_item:not(:first-child){
+    margin-left: 15px;
+}
+/* ==============================================taskActions=================== */
+
+.taskActions{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.taskAct_icon{
+    width: 24px;
+}
+.traskAct_bodyIcon{
+    display: flex;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+    white-space: nowrap;
+}
+.bodyTracking{
+    transition: all 0.5s;
+}
+.bodyTracking::after{
+    content: 'Параметри відслідовування';
+    position: absolute;
+    padding: 5px 5px;
+    color: #fff;
+    background-color: rgb(7, 0, 47);
+    border-radius: 5px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    flex-wrap: nowrap;
+    display: none;
+    transition: display 0.2s;
+}
+.bodyTracking:hover::after {
+    display: block;
+}
+
+
+.bodyМoting::after{
+    content: 'Варіанти голосування';
+    position: absolute;
+    padding: 5px 5px;
+    color: #fff;
+    background-color: rgb(7, 0, 47);
+    border-radius: 5px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    transition: display 0.2s;
+}
+.bodyМoting:hover::after {
+    display: block;
+}
+
+
+.bodyShare::after{
+    content: 'Параметри відслідовування';
+    position: absolute;
+    padding: 5px 5px;
+    color: #fff;
+    background-color: rgb(7, 0, 47);
+    border-radius: 5px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    transition: display 0.2s;
+}
+.bodyShare:hover::after {
+    display: block;
+}
+
+
+.bodyActions::after{
+    content: 'Параметри відслідовування';
+    position: absolute;
+    padding: 5px 5px;
+    color: #fff;
+    background-color: rgb(7, 0, 47);
+    border-radius: 5px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    transition: display 0.2s;
+}
+.bodyActions:hover::after {
+    display: block;
+}
+
+.closeModal{
+    padding: 7px 7px;
+    margin-left: 15px;
+}
+
+.closeModal::after{
+    content: 'Закрити';
+    position: absolute;
+    padding: 5px 5px;
+    color: #fff;
+    background-color: rgb(7, 0, 47);
+    border-radius: 5px;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: none;
+    transition: display 0.2s;
+}
+.closeModal:hover::after {
+    display: block;
+}
+.taskAct_icon{
+    padding: 5px 0;
+}
+
+.traskAct_bodyIcon:not(:last-child){
+    padding: 0px 10px;
+}
+
+.traskAct_bodyIcon:hover{
+    background-color: rgba(233, 233, 233, 0.659);
+    border-radius: 5px;
+}
+
+/* ==========================================blockDetails==================================== */
+
+.blockDetails{
+    padding: 0px 20px;
+    overflow-y: scroll;
+}
+.statusTaskActions{
+    display: flex;
+    padding: 10px 0px;
+}
+
+.statTaskAct{
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.statTaskAct:not(:last-child){
+    margin-right: 15px;
+}
+
+.statTaskAct:hover{
+    background-color: rgba(233, 233, 233, 0.659);
+    border-radius: 5px;
+}
+
+
+
+
+.accordionDetails{
+    /* padding: 10px 15px; */
+    border-radius: 5px;
+    border: 1px solid #000000;
+}
+.iconArrow{
+}
+.accordion-header{
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid #000000;
+    border-radius: 5px;
+
+}
+.accordion-content{
+    padding: 10px 15px;
+}
+.accordion-content p{
+    margin: 0;
+}
+.tableAccordion tr{
+    height: 50px;
+}
+.bodyAssignedAvatar{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.bodyAssignedAvatar, .asgnAcord_padding{
+    padding: 5px;
+}
+.bodyAssignedAvatar:hover{
+    background-color: rgba(233, 233, 233, 0.659);
+    border-radius: 5px;
+}
+.assigneeAcordion{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
+}
+.assignedAvatar{
+    margin-right: 15px;
+}
+.addAsegnee{
+    padding: 10px;
+    color: blue;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: end;
+}
+.addAsegnee:hover{
+    color: #290099;
+}
+
+.asgnAcord_descr{
+    display: flex;
+    justify-content: start;
+}
+
+
+.bodySetting{
+    display: flex;
+    justify-content: space-between;
+    padding-top: 15px;
+}
+.dateAdd-Editting{
+    color: rgba(86, 86, 86, 0.659)
+}
+.dateAE{
+    margin: 5px 0;
+}
+.Setting span{
+    padding: 5px 15px;
+    display: flex;
+    align-items: center;
+}
+.Setting span:hover{
+    background-color: rgba(233, 233, 233, 0.659);
+    border-radius: 5px;
+    cursor: pointer;
+}
+.settingIcon{
+    width: 24px;
+    margin-right: 10px;
+}
+.deleteTask{
+    border: none;
+    background-color: transparent;
+    transition: all 0.2s;
+}
+.deleteTask:hover{
+    transform: scale(1.2);
+    cursor: pointer;    
+    filter: drop-shadow(0px 0px 5px rgba(255, 0, 0, 0.2));
+}
+.deleteTaskIcon{
+    width: 24px;
+}

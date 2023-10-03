@@ -1,0 +1,70 @@
+.bodyMainLogIn{
+    width: 100%;
+    height: 80%;
+    background: linear-gradient(270deg, rgba(80,0,190,1) 0%, rgba(255,130,214,1) 100%);
+    clip-path: polygon(20% 0%, 80% 0%, 100% 0, 100% 80%, 88% 100%, 13% 100%, 0% 80%, 0 0);
+}
+.body_Home{
+    display: flex;
+    margin: 0 auto;
+}
+.bodyTitle_name{
+    width: 40%;
+    padding: 40px;
+}
+.titleRegister{
+    padding: 150px;
+    font-weight: 200;
+    font-size: 45px;
+    margin: 0;
+    color: #fff;
+}
+.fotmInput{
+    padding: 40px 40px 0px 0px;
+}
+.inputLogIn{
+    border: none;
+    border-radius: 5px;
+    padding: 10px 30px;
+    width: 95%;
+    font-size: 18px;
+}
+.inputLogIn:focus{
+    outline: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.8);
+}
+.inputLogIn:not(:last-child){
+    margin-bottom: 20px;
+}
+.register{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 18px 0px 5px 0px;
+}
+.Registration{
+    background: rgb(10, 7, 59);
+    color:#fff;
+    text-align: center;
+    width: 100%;
+    text-decoration: none;
+    padding: 15px 40px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+.Registration:hover{
+    background: rgb(83, 79, 163);
+}
+.body_img_home{
+    width: 60%;
+}
+.img_home{
+    width: 100%;
+    padding: 30px 0px;
+}
+.otherLogIn{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}
