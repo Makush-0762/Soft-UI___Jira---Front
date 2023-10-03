@@ -144,7 +144,7 @@ export default function Jira() {
 //* -----------------------------------------------Отримання id таску, для додавання виконавців, видалення. CRUD тасків*/
 
 
-//* -----------------------------------------------Отримання id виконавця для видалення*/
+//* -----------------------------------------------Отримання id виконавця для видалення + видалення*/
     const [assignedId, setAssignedId] = useState('');
     
     const handleAssigneHover = (idAssign) => {
@@ -155,6 +155,37 @@ export default function Jira() {
     useEffect(()=> {
         return () => handleAssigneHover;
     }, [assignedId])
+
+    const assignedTask = {
+        user_id: assignedId,
+        task_id: taskId,
+    }
+
+    const filteredTask = assigned.find(task => task.user_id === assignedTask.user_id && task.task_id === assignedTask.task_id);
+    
+    useEffect(() => {
+            if (filteredTask) {
+                console.log(filteredTask.id);
+            } else {
+                console.log('Елемент не знайдено у масиві assigned');
+            }
+    }, [assignedId, taskId, assigned]);
+
+
+    const sendObjectToServer = () => {
+            
+        axios.post(`http://127.0.0.1:8000/api/assigneds?deleteId=${filteredTask.id}`)
+            .then(response => {
+                console.log('Дані було успішно видалено');
+            })
+            .catch(error => {
+                console.error('Помилка при відправці даних на сервер:', error);
+            });
+            setTimeout(()=>{
+                window.location.reload(true)
+            },3000)
+        }
+//* -----------------------------------------------Отримання id виконавця для видалення + видалення*/
 
 
 
@@ -169,7 +200,7 @@ export default function Jira() {
                     <Link to="/projects" className="LinkBread">Пректи</Link> / <Link className="LinkBread" to="/projects/jira"> Jira</Link>
                     </Div>
                     <Div className='bodyTitle'>
-                    <P className='titleBacklog'>Беклог .xdbnlcknlnlkm fk o;j xk; xcm xlk n x kj xf k cxk x kxf k;</P>
+                    <P className='titleBacklog'>Беклог</P>
                     <Div className="linkTitle"><A href='#' ><Img src={elips} /></A></Div>
                     </Div>
             
@@ -240,7 +271,7 @@ export default function Jira() {
                                                             <P>{assigned.name}</P>
                                                         </Div>
                                                         {isAddAssignVisible[assigned.id] && (
-                                                        <Div className="deleteAssign" >
+                                                        <Div className="deleteAssign" onClick={sendObjectToServer}>
                                                             <Img src={user_delete} className="user_delete" alt="user_delete" />
                                                         </Div>
                                                         )}
