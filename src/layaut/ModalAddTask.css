@@ -11,10 +11,18 @@
     width: 30vw;
     height: 30vh;
     background-color: #b6b6b6;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto auto;
+    gap: 10px;
 }
+.testDataItem{
+    grid-column:  span 2;
+}
+
 .blockEnterDataTask h2{
     font-weight: 500;
-    margin-left: 50px;
+    /* margin-left: 50px; */
 }
 .bodyInputEnter{
     
@@ -42,5 +50,37 @@
 }
 
 .selectModalAddTask{
-    
+    width: 100%;
+    padding: 10px;
+    border-radius: 10px;
+}
+.selectModalAddTask option{
+    color:#000;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+.actionDataModalTask{
+    display: flex;
+}
+.actionDataModalTask button{
+    flex-grow: 1;
+    border-radius: 10px;
+    border: 1px solid rgb(0, 57, 227);
+}
+.actionDataModalTask button:first-child{
+    margin-right: 5px;
+}
+.actionDataModalTask button:last-child{
+    margin-left: 5px;
+    background-color: rgba(0, 81, 255, 0.733);
+    color: #fff;
+}
+.actionDataModalTask button:first-child:hover{
+    background-color: #d8e7ff;
+    cursor: pointer;
+}
+.actionDataModalTask button:last-child:hover{
+    background-color: rgba(0, 81, 255, 0.632);
+    cursor: pointer;
 }
