@@ -54,6 +54,10 @@
     padding: 10px;
     border-radius: 10px;
 }
+.selectModalAddTask:focus{
+    outline: none;
+    box-shadow: 0px 0px 15px #919191;
+}
 .selectModalAddTask option{
     color:#000;
     border-radius: 10px;

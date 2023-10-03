@@ -13,6 +13,26 @@ import Form from "./elements/Form";
 
 export default function ModalAddTask ({}){
 
+    const [status, setStatus] = useState();
+
+    const [descriptionTask, setDescriptionTask] = useState('');
+
+    useEffect(()=> {
+        console.log(descriptionTask);
+    }, [descriptionTask])
+
+    useEffect(() => {
+        axios
+            .get(`http://127.0.0.1:8000/api/status`)
+            .then(response => {
+                setStatus(response.data.response.status.data);
+                console.log(response.data.response.status.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+}, []);
+
 
     return(
             <Div className="bodyModalAddTask" >
@@ -22,19 +42,21 @@ export default function ModalAddTask ({}){
                     </Div>
                     <Div className="blockEnterData_item testDataItem">
                         <Form className="bodyInputEnter">
-                            <Label className="labelEnterTaskName" htmlFor="name">Введіть опис до таску, або ж посилання</Label>
+                            <Label className="labelEnterTaskName" htmlFor="name">Введіть опис до таску, або ж жожаткові посилання</Label>
                             {/* <Input className="inputEnterTaskName" id="name" placeholder="Назва таску"/> */}
-                            <textarea className="textareaEnterTaskName" id="name"></textarea>
+                            <textarea className="textareaEnterTaskName" 
+                            value={descriptionTask} 
+                            onChange={(e) => setDescriptionTask(e.target.value)} 
+                            id="name"></textarea>
                         </Form>
                     </Div>
                     <Div className="blockEnterData_item">
                         <Form>
                             <Label className="labelEnterTaskName" htmlFor="status_id">Статус</Label>
                             <select className="selectModalAddTask" id="status_id">
-                                <option>До виконання</option>
-                                <option>До виконання</option>
-                                <option>До виконання</option>
-                                <option>До виконання</option>
+                                {status.map(stat =>(
+                                    <option id="status_id">{stat.name}</option>
+                                ))}
                             </select>
                             <Input className="inputEnterTaskUser" id="user_id" value="1" type="hidden" />
                         </Form>
