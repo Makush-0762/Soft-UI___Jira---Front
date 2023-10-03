@@ -156,7 +156,7 @@ export default function Jira() {
         return () => handleAssigneHover;
     }, [assignedId])
 
-    
+
 
 
     return (
@@ -169,7 +169,7 @@ export default function Jira() {
                     <Link to="/projects" className="LinkBread">Пректи</Link> / <Link className="LinkBread" to="/projects/jira"> Jira</Link>
                     </Div>
                     <Div className='bodyTitle'>
-                    <P className='titleBacklog'>Беклог</P>
+                    <P className='titleBacklog'>Беклог .xdbnlcknlnlkm fk o;j xk; xcm xlk n x kj xf k cxk x kxf k;</P>
                     <Div className="linkTitle"><A href='#' ><Img src={elips} /></A></Div>
                     </Div>
             
