@@ -6,6 +6,7 @@ import Jira from './Jira';
 import Projects from './Projects';
 import ModalComment from './ModalComment';
 import ModalAddAssigneds from './ModalAddAssigneds';
+import ModalAddTask from './ModalAddTask';
 import TuNeTukay from './TuNeTukay';
 
 
@@ -20,6 +21,7 @@ function App() {
           <Route path='/projects/jira' element={ <Jira />} />
           <Route path='/projects/jira/ModalComment' element={ <ModalComment />} />
           <Route path='/projects/jira/ModalAddAssigneds' element={ <ModalAddAssigneds />} />
+          <Route path='/projects/jira/ModalAddTask' element={ <ModalAddTask />} />
           <Route path='/modal' element={ <ModalComment />} />
           <Route path='/tu_ne_tukay' element={ <TuNeTukay />} />
           <Route path='/tu' element={ <TuNeTukay />} />

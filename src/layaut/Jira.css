@@ -365,9 +365,14 @@
     height: 30px;
     margin-left: auto;
     display: block;
-    background-color: rgba(191, 95, 255, 0.357);;
+    background-color: rgba(191, 95, 255, 0.357);
+    transition: all 1s ease-in;
     border-radius: 10px;
     cursor: url('../img/cursor_deleteKR.png'), auto;
+}
+.deleteAssign:active{
+    transform: scale(0.8);
+    box-shadow: inset 0px 0px 15px rgb(0, 0, 0);
 }
 .user_delete{
     width: 24px;

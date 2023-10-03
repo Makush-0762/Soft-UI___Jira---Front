@@ -183,9 +183,30 @@ export default function Jira() {
             });
             setTimeout(()=>{
                 window.location.reload(true)
-            },3000)
+            },1500)
         }
 //* -----------------------------------------------Отримання id виконавця для видалення + видалення*/
+
+
+// ! ----------------------------------------------CRUD таск/
+//* -----------------------------------------------Додавання таску*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//* -----------------------------------------------Додавання таску*/
+// ! ----------------------------------------------CRUD таск/
 
 
 
@@ -238,7 +259,7 @@ export default function Jira() {
                         <Div className="body_task">
                         {/* <ModalComment  idTask={task.id}  titleTask={task.name} />  <Link to={{pathname: `/projects/jira/ModalComment` ,state: {idTask: task.id,titleTask: task.name,},}}><Img src={pencil} className='imgUpdate' /></Link>*/}
                         {tasks.map(task => (
-                            <Div className='task' variant="primary" key={task.id} onClick={() => handleTaskClick(task.id)}>
+                            <Div className='task' variant="primary" key={task.id} onMouseEnter={() => handleTaskClick(task.id)}>
                                 <Div className='left-BlockTast'>
                                     <input type="checkbox" className="form-check-input item-leftBlock" id="exampleCheck1" />
                                     <P className='numberSprint item-leftBlock'>SCT-{task.id}</P>
