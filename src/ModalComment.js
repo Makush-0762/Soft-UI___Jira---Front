@@ -31,26 +31,29 @@ import smile from "./img/smile.png"
 // import Accordion from 'react-bootstrap/Accordion';
 import pencil from "./img/pencil.svg"
 import settings from "./img/setting.png"
+import edit_task from "./img/edit-task.png"
+import send_update_task from "./img/send_update_task.png"
 import axios from "axios";
 // import Select from 'react-select'
 
 
 
-export default function ModalComment ({idTask, titleTask, comments, assigneds, creator}){
+export default function ModalComment ({idTask, titleTask, comments, assigneds, creator, taskIdOnClick}){
 
     const baseUrl = "http://127.0.0.1:8000/storage/avatars/"; // Аватарки
-
 
     const [show, setShow] = useState(false);
 
     const [dropMenu, setDropMenu] = useState(false);
 
     const [showParagpaph, setShowParagpaph] = useState(true);
+
     const [isEditorVisible, setEditorVisible] = useState(false);
 
-
     const [showInput, setShowInput] = useState(true);
+
     const [isEditorVisibleInp, setIsEditorVisibleInp] = useState(false);
+
 
     const toggleEditorAndInput = () => {
         setIsEditorVisibleInp(!isEditorVisibleInp);
@@ -114,6 +117,68 @@ function formatDate(apiDate) {
     return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
 
+//** ---------------------------------------------------Вся процедура реадагуваня таску */
+    const [showIconUpdate, setShowIconUpdate] = useState(false);
+
+    const [updateStatus, setUpdateStatus] = useState(); //? Те що прийщло із АПІ
+
+    const [showInputUpdate, setShowInputUpdate] = useState(false);
+
+    const [idUpdateStatus, setIdUpdateStatus] = useState('');
+
+    const [updateNameTask, setUpdateNameTask] = useState("");
+
+    const idCreatorTasak = 1;
+
+    const sendDataObject = {
+        name: updateNameTask,
+        user_id: idCreatorTasak,
+        status_id: idUpdateStatus,
+    }
+
+    useEffect(()=> {
+        console.log(idUpdateStatus);
+        console.log(updateNameTask);
+    }, [idUpdateStatus, updateNameTask])
+
+
+    useEffect(() => {
+        axios
+            .get(`http://127.0.0.1:8000/api/status`)
+            .then(response => {
+                setUpdateStatus(response.data.response.status.data);
+                console.log(response.data.response.status.data);
+            })
+            .catch(error => {
+                console.error(error);
+            });
+    }, [updateStatus]);
+
+    const sendUpdatedDataTask = () => {
+            if(updateNameTask && idCreatorTasak && idUpdateStatus){
+                axios.post(`http://127.0.0.1:8000/api/task?id=${taskIdOnClick}`, sendDataObject)
+                .then(response => {
+                    console.log('Дані було успішно редаговано');
+                })
+                .catch(error => {
+                    console.error('Помилка при відправці даних на сервер:', error);
+                });
+                setTimeout(()=>{
+                    window.location.reload(true)
+                },1500)
+            }   else {
+                alert('Ви ввели не всі дані');
+                // setTimeout(()=>{
+                //     window.location.reload(true)
+                // },1000)
+            }
+    }
+
+
+
+
+//** ---------------------------------------------------Вся процедура реадагуваня таску */
+
     return(
         <Div style={{padding:"20px",}}>
             <Div>
@@ -147,8 +212,32 @@ function formatDate(apiDate) {
                     <Div className="blockDescription">
 
 
-                        <Div className="blockDescription_titleTask titleTask">
-                            <h2>{titleTask}</h2>
+                        <Div    className="blockDescription_titleTask titleTask" 
+                                onClick={() => {setShowIconUpdate(!showIconUpdate)}}>
+                            {showInputUpdate ? (
+                                    <Label className="labelUpdateTaskName" htmlFor="inputUpdateTaskName">
+                                        {titleTask} 
+                                        <textarea className="inputUpdateTaskName" id="inputUpdateTaskName" onChange={(e) => setUpdateNameTask(e.target.value)}  /> 
+                                    </Label>
+                            ) : (
+                                <h2>{titleTask}</h2>
+                            )}
+                            
+                            
+                            <Div className={`bodyIconUpdateTask ${showIconUpdate ? "bodyIconUpdateTaskActive" : ""}`} >
+                                <span className="spanIconUpdateTask icnUpdTask" onClick={() => {setShowInputUpdate(!showInputUpdate)}}>
+                                    <Img className="iconUpdateTask " alt="Icon-Update-Task" src={edit_task}/>
+                                </span>
+                                {showInputUpdate? (
+                                    <span className="icnSndTask spanIconUpdateTask" onClick={sendUpdatedDataTask}>
+                                        <Img className="iconUpdateTask icnSndTask" alt="Icon-Send-Task" src={send_update_task}/>
+                                    </span>
+                                ) : (
+                                    <></>
+                                )
+                                }
+                                
+                            </Div>
                         </Div>
 
                         <Div className="blockDescription_buttonGroup buttonGroup">
@@ -257,37 +346,48 @@ function formatDate(apiDate) {
                                 </Div> )}
                         </Div>
 
-                            {comments.map((comment) => {
+                        {comments && comments.length > 0 ? (
+                            comments.map((comment) => {
                                 const user = users.find(user => user.id === comment.user_id);
-                                return(
-                                    <Div className="commentItem">
-                                    <Div className="addComment_BodyImgUser">
-                                        <Img src={profile} className="imgUser" />
-                                    </Div>
-                                    <Div className="commentField">
-                                        <Div className="commF_userDetails">
-                                            <P className="commF_userDetails userName">{user ? user.name : 'АНОНІМ'}</P>
-                                            <P className="commF_userDetails timePublicate">{formatDate(comment.created_at)}</P>
+                                return (
+                                    <Div className="commentItem" key={comment.id}>
+                                        <Div className="addComment_BodyImgUser">
+                                            <Img src={profile} className="imgUser" />
                                         </Div>
-                                        <Div className="commF_comment"><b>{comment.description}</b></Div>
-                                        <Div className="commF_changeComm">
-                                            <span className="changeComm_item chanComm_Edit">Змінити</span>
-                                            <span className="changeComm_item chanComm_Delete">Видалити</span>
-                                            <span className="changeComm_item chanComm_BodyImg"><Img className="chanComm_iconReaction" src={smile}/></span>
+                                        <Div className="commentField">
+                                            <Div className="commF_userDetails">
+                                                <P className="commF_userDetails userName">{user ? user.name : 'АНОНІМ'}</P>
+                                                <P className="commF_userDetails timePublicate">{formatDate(comment.created_at)}</P>
+                                            </Div>
+                                            <Div className="commF_comment"><b>{comment.description}</b></Div>
+                                            <Div className="commF_changeComm">
+                                                <span className="changeComm_item chanComm_Edit">Змінити</span>
+                                                <span className="changeComm_item chanComm_Delete">Видалити</span>
+                                                <span className="changeComm_item chanComm_BodyImg"><Img className="chanComm_iconReaction" src={smile}/></span>
+                                            </Div>
                                         </Div>
                                     </Div>
-                                </Div>
-                                )
-                                })}
-
+                                );
+                            })
+                        ) : (
+                            <Div style={{fontSize: '18px'}}><center><b>Коментарі відсутні</b></center></Div>
+                        )}
                     </Div>
 
                     <Div className="blockDetails">
                         <Div className="statusTaskActions">
-                            <P className="statTaskAct">В роботі <Img className="imgDropButton" src={arrowB}/></P>
+                            {showInputUpdate ? (
+                                    <select className="selectUpateTask" id="status_id" onChange={(e) => setIdUpdateStatus(e.target.value)}>
+                                        <option id="status_id" disabled="true" selected>Виберіть статус таску</option>
+                                        {updateStatus && updateStatus.map(status =>(
+                                            <option id="status_id" value={status.id} >{status.name}</option>
+                                        ))}
+                                    </select>
+                            ) : (
+                                    <P className="statTaskAct">В роботі <Img className="imgDropButton" src={arrowB}/></P>
+                            )}
                             <P className="statTaskAct">Дія <Img className="imgDropButton" src={arrowB}/></P>
                         </Div>
-
                         <Div className="accordionDetails">
                             <Div className="accordion-header" onClick={toggleAccordion}>
                                 <span>Заголовок акордеону</span>

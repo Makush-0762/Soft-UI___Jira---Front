@@ -38,7 +38,7 @@ export default function ModalAddTask ({}){
             .catch(error => {
                 console.error(error);
             });
-}, []);
+    }, []);
 
     const sendDataObject = {
         name: descriptionTask,
@@ -58,7 +58,7 @@ const createTask = () => {
         });
         setTimeout(()=>{
             window.location.reload(true)
-        },1500)
+        },3000)
     }   else {
         alert('Ви ввели не всі дані');
         // setTimeout(()=>{

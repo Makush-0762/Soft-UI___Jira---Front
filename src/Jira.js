@@ -35,7 +35,7 @@ export default function Jira() {
 
     const [assigned, setAssigned] = useState([]);
 
-    const [user, setUser] = useState([]);
+    // const [user, setUser] = useState([]);
     
     const [hoveredStates, setHoveredStates] = useState({});
 
@@ -81,15 +81,15 @@ export default function Jira() {
                     console.error(error);
                 });
 
-            axios
-                .get(`http://127.0.0.1:8000/api/users`)
-                .then(response => {
-                    setUser(response.data.response.users.data);
-                    console.log(response.data.response.users.data);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+            // axios
+            //     .get(`http://127.0.0.1:8000/api/users`)
+            //     .then(response => {
+            //         setUser(response.data.response.users.data);
+            //         console.log(response.data.response.users.data);
+            //     })
+            //     .catch(error => {
+            //         console.error(error);
+            //     });
 
             axios
                 .get(`http://127.0.0.1:8000/api/assigneds`)
@@ -100,7 +100,6 @@ export default function Jira() {
                 .catch(error => {
                     console.error(error);
                 });
-    
     }, []);
 
 
@@ -290,7 +289,7 @@ export default function Jira() {
                                             <input type="checkbox" className="form-check-input item-leftBlock" id="exampleCheck1" />
                                             <P className='numberSprint item-leftBlock'>SCT-{task.id}</P>
                                             <P className='numberSprint item-leftBlock'>{task.name}</P>
-                                            <P className="modalDetails"><ModalComment  idTask={task.id}  titleTask={task.name} comments={task.comments} assigneds={task.assigneds} creator={task.user} /></P> 
+                                            <P className="modalDetails"><ModalComment taskIdOnClick={taskId}  idTask={task.id}  titleTask={task.name} comments={task.comments} assigneds={task.assigneds} creator={task.user} /></P> 
                                         </Div>
                                         <Div className='right-BlockTask'>
                                             <P className='quintitu item-rightBlock'>-</P>

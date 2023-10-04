@@ -9,7 +9,7 @@
 .blockDescription{
     overflow-y: auto;
     /* width: 60%; */
-    padding-right: 15px;
+    padding: 15px 15px 0px 0px;
 }
 .body_modal{
     width: 100vw;
@@ -581,4 +581,100 @@
 .settingIcon{
     width: 24px;
     margin-right: 10px;
+}
+.blockDescription_titleTask{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    height: 51px;
+}
+.bodyIconUpdateTask{
+    overflow: visible;
+    position: relative;
+    margin-top: auto;
+    margin-bottom: 5px;
+}
+/* .bodyIconUpdateTaskActive{
+    display: block;
+} */
+.bodyIconUpdateTask img{
+    cursor: pointer;
+    width: 24px;
+    transition: all 0.2s ease;
+}
+.bodyIconUpdateTask img:hover{
+    transform: scale(1.1);
+    filter: drop-shadow(0px 0px 50px rgb(0, 0, 0, 0.4));
+}
+.labelUpdateTaskName{
+    width: 90%;
+}
+.inputUpdateTaskName{
+    width: 100%;
+    box-sizing: border-box;
+    height: 4vh;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 15px;
+}  
+.inputUpdateTaskName:focus{
+    outline: none;
+    box-shadow: 0px 0px 15px #919191;
+}
+.spanIconUpdateTask:first-child{
+    margin-right: 20px;
+}
+
+
+.icnUpdTask{
+    position: relative;
+    transition: all 0.5s;
+}
+.icnUpdTask:after{
+    content: 'Редагувати name таску / Вийти';
+    position: absolute;
+    padding: 5px 5px;
+    color: #fff;
+    background-color: rgb(7, 0, 47);
+    border-radius: 5px;
+    top: -40px;
+    left: -50px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    display: none;
+    transition: display 0.2s;
+}
+.icnUpdTask:hover::after {
+    display: block;
+}
+
+.icnSndTask{
+    position: relative;
+    transition: all 0.5s;
+}
+.icnSndTask:after{
+    content: 'Змінити (відправити) дані';
+    position: absolute;
+    padding: 5px 5px;
+    color: #fff;
+    background-color: rgb(7, 0, 47);
+    border-radius: 5px;
+    top: -40px;
+    left: -50px;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    display: none;
+    transition: display 0.2s;
+}
+.icnSndTask:hover::after {
+    display: block;
+}
+.selectUpateTask{
+    width: 30%;
+    padding: 10px;
+    border-radius: 10px;
+}
+.selectUpateTask:focus{
+    outline: none;
+    box-shadow: 0px 0px 15px #919191;
 }
