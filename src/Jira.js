@@ -192,21 +192,31 @@ export default function Jira() {
 // ! ----------------------------------------------CRUD таск/
 //* -----------------------------------------------Додавання таску*/
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+            // ? Логіка додавання таску знаходиться у компоненті <ModalAddTask />
 
 //* -----------------------------------------------Додавання таску*/
+
+
+//* -----------------------------------------------Видалення таску */
+
+    const deleteTasks = () => {
+
+        axios.post(`http://127.0.0.1:8000/api/task?deleteId=${taskId}`)
+        .then(response => {
+            console.log('Дані було успішно видалено');
+        })
+        .catch(error => {
+            console.error('Помилка при відправці даних на сервер:', error);
+        });
+        setTimeout(()=>{
+            window.location.reload(true)
+        },1500)
+        
+    }
+
+//* -----------------------------------------------Видалення таску */
+
+
 // ! ----------------------------------------------CRUD таск/
 
 
@@ -275,7 +285,7 @@ export default function Jira() {
                         {/* <ModalComment  idTask={task.id}  titleTask={task.name} />  <Link to={{pathname: `/projects/jira/ModalComment` ,state: {idTask: task.id,titleTask: task.name,},}}><Img src={pencil} className='imgUpdate' /></Link>*/}
                             { tasks.length > 0 ? (
                                 tasks.map(task => (
-                                    <Div className='task' variant="primary" key={task.id} onMouseEnter={() => handleTaskClick(task.id)}>
+                                    <Div className='task' variant="primary" key={task.id} onMouseEnter={() =>  handleTaskClick(task.id)}>
                                         <Div className='left-BlockTast'>
                                             <input type="checkbox" className="form-check-input item-leftBlock" id="exampleCheck1" />
                                             <P className='numberSprint item-leftBlock'>SCT-{task.id}</P>
@@ -321,7 +331,7 @@ export default function Jira() {
                                                 </span>
                                                 
                                             </Div>
-                                            <button className="deleteTask" >
+                                            <button className='deleteTask' onClick={deleteTasks}  >
                                                 <Img src={deleteTask} className="deleteTaskIcon"/>
                                             </button>
                                         </Div>
