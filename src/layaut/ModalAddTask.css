@@ -1,16 +1,28 @@
 .bodyModalAddTask{
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
     height: 100vh;
     width: 100vw;
+    position: absolute;
+    top:0;
+    left: 0;
+    background-color: rgba(0, 0, 255, 0.184);
+    backdrop-filter: blur(8.5px);
+    z-index: 999;
+    color: #fff;
+}
+.bodyModalAddTaskActive{
+    display: flex;
 }
 .blockEnterDataTask{
     padding: 20px;
     border-radius: 10px;
     width: 30vw;
-    height: 30vh;
-    background-color: #b6b6b6;
+    height: auto;
+    background-color: rgba(0, 0, 255, 0.184);
+    backdrop-filter: blur(8.5px);
+    border: 2px solid #fff;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto;

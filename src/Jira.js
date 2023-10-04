@@ -23,6 +23,7 @@ import ModalComment from "./ModalComment";
 import { Button } from "react-bootstrap-v5";
 import pencil from "./img/pencil.svg"
 import ModalAddAssigneds from "./ModalAddAssigneds";
+import ModalAddTask from "./ModalAddTask";
 // import classnames from 'classnames';
 
 
@@ -209,6 +210,19 @@ export default function Jira() {
 // ! ----------------------------------------------CRUD таск/
 
 
+//* -----------------------------------------------Перезавантаження сторінки якщо дані не завантажуються 15 секунд */
+
+    useEffect(() => {
+        if (tasks.length === 0) {
+            const timeoutId = setTimeout(() => {
+                window.location.reload(true);
+            }, 15000);
+
+            return () => clearTimeout(timeoutId); // Очищення таймаута при розміщенні компоненту
+        }
+    }, [tasks]);
+
+//* -----------------------------------------------Перезавантаження сторінки якщо дані не завантажуються 15 секунд */
 
 
     return (
@@ -252,65 +266,70 @@ export default function Jira() {
                                 <P className='blue_Zero'>0</P>
                                 <P className='green_Zero'>0</P>
                             </Div>
-                            <P className='sprintTasks'>Запустити спринт</P>
+
+                            <ModalAddTask />
                             <Div className="linkTitleTasks"><A href='#' ><Img src={elips} /></A></Div>
                             </Div>
                         </Div>
                         <Div className="body_task">
                         {/* <ModalComment  idTask={task.id}  titleTask={task.name} />  <Link to={{pathname: `/projects/jira/ModalComment` ,state: {idTask: task.id,titleTask: task.name,},}}><Img src={pencil} className='imgUpdate' /></Link>*/}
-                        {tasks.map(task => (
-                            <Div className='task' variant="primary" key={task.id} onMouseEnter={() => handleTaskClick(task.id)}>
-                                <Div className='left-BlockTast'>
-                                    <input type="checkbox" className="form-check-input item-leftBlock" id="exampleCheck1" />
-                                    <P className='numberSprint item-leftBlock'>SCT-{task.id}</P>
-                                    <P className='numberSprint item-leftBlock'>{task.name}</P>
-                                    <P className="modalDetails"><ModalComment  idTask={task.id}  titleTask={task.name} comments={task.comments} assigneds={task.assigneds} creator={task.user} /></P> 
-                                </Div>
-                                <Div className='right-BlockTask'>
-                                    <P className='quintitu item-rightBlock'>-</P>
-                                    <Div className='bodyStatus' style={statusColors[task.status.name]}>
-                                        <p className="statusBlock">{task.status.name}</p>
-                                    </Div>
-                                    <Div className='body_ImgProfile item-rightBlock'>
-                                        <span className='buttonAssigned'onMouseEnter={() => setHoveredState(task.id, true)} // Встановлюємо isHovered в true при наведенні
-                                            onMouseLeave={() => setHoveredState(task.id, false)}>
-                                            Виконавці:
-                                            {hoveredStates[task.id] && (
-                                            <Div className="body_ModalAssigned " >
-                                                <span className="modalArrowUp"></span>
-                                                {task.assigneds.map(assigned => (
-                                                    <Div className="assigned" key={assigned.id}
-                                                        onMouseEnter={() => {handleMouseEnter(assigned.id);
-                                                                            handleAssigneHover(assigned.id)
-                                                            }
-                                                        }
-                                                        onMouseLeave={() => handleMouseLeave(assigned.id)}>
-                                                        <Div className="body_assignedAvatar">
-                                                            <Img src={`${baseUrl}${assigned.user_avatar}`} className="assignedAvatar" alt="assignedAvatar" />
-                                                        </Div>
-                                                        <Div className="assigned_name">
-                                                            <P>{assigned.name}</P>
-                                                        </Div>
-                                                        {isAddAssignVisible[assigned.id] && (
-                                                        <Div className="deleteAssign" onClick={sendObjectToServer}>
-                                                            <Img src={user_delete} className="user_delete" alt="user_delete" />
-                                                        </Div>
-                                                        )}
-                                                    </Div>
-                                                ))}
-                                                <hr />
-                                                <ModalAddAssigneds taskId={taskId}/>
+                            { tasks.length > 0 ? (
+                                tasks.map(task => (
+                                    <Div className='task' variant="primary" key={task.id} onMouseEnter={() => handleTaskClick(task.id)}>
+                                        <Div className='left-BlockTast'>
+                                            <input type="checkbox" className="form-check-input item-leftBlock" id="exampleCheck1" />
+                                            <P className='numberSprint item-leftBlock'>SCT-{task.id}</P>
+                                            <P className='numberSprint item-leftBlock'>{task.name}</P>
+                                            <P className="modalDetails"><ModalComment  idTask={task.id}  titleTask={task.name} comments={task.comments} assigneds={task.assigneds} creator={task.user} /></P> 
+                                        </Div>
+                                        <Div className='right-BlockTask'>
+                                            <P className='quintitu item-rightBlock'>-</P>
+                                            <Div className='bodyStatus' style={statusColors[task.status.name]}>
+                                                <p className="statusBlock">{task.status.name}</p>
                                             </Div>
-                                        )}
-                                        </span>
-                                        
+                                            <Div className='body_ImgProfile item-rightBlock'>
+                                                <span className='buttonAssigned'onMouseEnter={() => setHoveredState(task.id, true)} // Встановлюємо isHovered в true при наведенні
+                                                    onMouseLeave={() => setHoveredState(task.id, false)}>
+                                                    Виконавці:
+                                                    {hoveredStates[task.id] && (
+                                                    <Div className="body_ModalAssigned " >
+                                                        <span className="modalArrowUp"></span>
+                                                        {task.assigneds.map(assigned => (
+                                                            <Div className="assigned" key={assigned.id}
+                                                                onMouseEnter={() => {handleMouseEnter(assigned.id);
+                                                                                    handleAssigneHover(assigned.id)
+                                                                    }
+                                                                }
+                                                                onMouseLeave={() => handleMouseLeave(assigned.id)}>
+                                                                <Div className="body_assignedAvatar">
+                                                                    <Img src={`${baseUrl}${assigned.user_avatar}`} className="assignedAvatar" alt="assignedAvatar" />
+                                                                </Div>
+                                                                <Div className="assigned_name">
+                                                                    <P>{assigned.name}</P>
+                                                                </Div>
+                                                                {isAddAssignVisible[assigned.id] && (
+                                                                <Div className="deleteAssign" onClick={sendObjectToServer}>
+                                                                    <Img src={user_delete} className="user_delete" alt="user_delete" />
+                                                                </Div>
+                                                                )}
+                                                            </Div>
+                                                        ))}
+                                                        <hr />
+                                                        <ModalAddAssigneds taskId={taskId}/>
+                                                    </Div>
+                                                )}
+                                                </span>
+                                                
+                                            </Div>
+                                            <button className="deleteTask" >
+                                                <Img src={deleteTask} className="deleteTaskIcon"/>
+                                            </button>
+                                        </Div>
                                     </Div>
-                                    <button className="deleteTask" >
-                                        <Img src={deleteTask} className="deleteTaskIcon"/>
-                                    </button>
-                                </Div>
-                            </Div>
-                        ))}
+                                ))
+                            ) : (
+                                <Div style={{fontSize: '28px'}}><center>Loading...</center></Div>
+                            )}
                         </Div>
                     </Div>
                 </Div>
