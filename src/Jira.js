@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import './layaut/Jira.css';
 import LayoutInside from "./layaut/LayoutInside";
 import Div from "./elements/Div"
@@ -24,22 +24,29 @@ import { Button } from "react-bootstrap-v5";
 import pencil from "./img/pencil.svg"
 import ModalAddAssigneds from "./ModalAddAssigneds";
 import ModalAddTask from "./ModalAddTask";
+import { ApiDataContext } from "./App";
 // import classnames from 'classnames';
 
 
 export default function Jira() {
 
+    const context = useContext(ApiDataContext);
+    
+    console.log(context);
+
     // const [modalShow, setModalShow] = useState(false);
 
-    const [tasks, setTasks] = useState([]);
+    const tasks = context.tasks;
 
-    const [assigned, setAssigned] = useState([]);
+    const assigned = context.assigned;
 
-    // const [user, setUser] = useState([]);
+    const user = context.user;
+
+    const status = context.status;
     
     const [hoveredStates, setHoveredStates] = useState({});
 
-    const [comments, setComments] = useState([]);
+    // const [comments, setComments] = useState([]);
 
     const [showModalAddAssign, setShowModalAddAssign] = useState(false);
 
@@ -70,37 +77,37 @@ export default function Jira() {
         }));
     };
 
-    useEffect(() => {
-            axios
-                .get(`http://127.0.0.1:8000/api/task`)
-                .then(response => {
-                    setTasks(response.data.response.task.data);
-                    console.log(response.data.response.task.data);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+    // useEffect(() => {
+    //         axios
+    //             .get(`http://127.0.0.1:8000/api/task`)
+    //             .then(response => {
+    //                 setTasks(response.data.response.task.data);
+    //                 console.log(response.data.response.task.data);
+    //             })
+    //             .catch(error => {
+    //                 console.error(error);
+    //             });
 
-            // axios
-            //     .get(`http://127.0.0.1:8000/api/users`)
-            //     .then(response => {
-            //         setUser(response.data.response.users.data);
-            //         console.log(response.data.response.users.data);
-            //     })
-            //     .catch(error => {
-            //         console.error(error);
-            //     });
+    //         axios
+    //             .get(`http://127.0.0.1:8000/api/users`)
+    //             .then(response => {
+    //                 setUser(response.data.response.users.data);
+    //                 console.log(response.data.response.users.data);
+    //             })
+    //             .catch(error => {
+    //                 console.error(error);
+    //             });
 
-            axios
-                .get(`http://127.0.0.1:8000/api/assigneds`)
-                .then(response => {
-                    setAssigned(response.data.response.task.data);
-                    console.log(response.data.response.task.data);
-                })
-                .catch(error => {
-                    console.error(error);
-                });
-    }, []);
+    //         axios
+    //             .get(`http://127.0.0.1:8000/api/assigneds`)
+    //             .then(response => {
+    //                 setAssigned(response.data.response.task.data);
+    //                 console.log(response.data.response.task.data);
+    //             })
+    //             .catch(error => {
+    //                 console.error(error);
+    //             });
+    // }, []);
 
 
     const baseUrl = "http://127.0.0.1:8000/storage/avatars/";
@@ -133,13 +140,13 @@ export default function Jira() {
     const [taskId, setTaskId] = useState('');
 
     const handleTaskClick = (idTask) => {
-        console.log(idTask);
+    console.log(idTask);
         setTaskId(idTask);
     }
 
     useEffect(()=> {
         return () => handleTaskClick;
-    }, [taskId])
+    }, [taskId, context])
 
 //* -----------------------------------------------Отримання id таску, для додавання виконавців, видалення. CRUD тасків*/
 
@@ -221,129 +228,129 @@ export default function Jira() {
 
 //* -----------------------------------------------Перезавантаження сторінки якщо дані не завантажуються 15 секунд */
 
-    useEffect(() => {
-        if (tasks.length === 0) {
-            const timeoutId = setTimeout(() => {
-                window.location.reload(true);
-            }, 15000);
+    // useEffect(() => {
+    //     if (tasks.length === 0) {
+    //         const timeoutId = setTimeout(() => {
+    //             window.location.reload(true);
+    //         }, 15000);
 
-            return () => clearTimeout(timeoutId); // Очищення таймаута при розміщенні компоненту
-        }
-    }, [tasks]);
+    //         return () => clearTimeout(timeoutId); // Очищення таймаута при розміщенні компоненту
+    //     }
+    // }, [tasks]);
 
 //* -----------------------------------------------Перезавантаження сторінки якщо дані не завантажуються 15 секунд */
 
 
     return (
         <>
-        <LayoutInside>
-            <Div className='mainProject'>
+            <LayoutInside>
+                <Div className='mainProject'>
 
-                <Div className="subNameProectTest">
-                    <Div>
-                    <Link to="/projects" className="LinkBread">Пректи</Link> / <Link className="LinkBread" to="/projects/jira"> Jira</Link>
-                    </Div>
-                    <Div className='bodyTitle'>
-                    <P className='titleBacklog'>Беклог</P>
-                    <Div className="linkTitle"><A href='#' ><Img src={elips} /></A></Div>
-                    </Div>
-            
-                    <Div className='body_Search-Backlog'>
-                    <Div className='bodyForm'>
-                        <Form className='inputBacklogr bodyForm-Item'>
-                        <Label htmlFor='idSearchBacklog'>
-                            <A href='#'><Img src={magnifier} className='magnifierBacklog' /></A>
-                            <Input type='text' className='inputSearchBacklog' id='idSearch' placeholder='Пошук по беклогу' />
-                        </Label>
-                        </Form>
-        
-                        <Div className='bodyForm-Item'>
-                            <P className='epic'>Епік <Img src={arrow} className='iconEpic' /></P>
+                    <Div className="subNameProectTest">
+                        <Div>
+                        <Link to="/projects" className="LinkBread">Пректи</Link> / <Link className="LinkBread" to="/projects/jira"> Jira</Link>
                         </Div>
-                    </Div>
-                    <Div>
-                        <P className='statistic'><Img src={analitic} /> Статистика</P>
-                    </Div>
-                    </Div>
-                    <Div className='body_Tasks'>
+                        <Div className='bodyTitle'>
+                        <P className='titleBacklog'>Беклог</P>
+                        <Div className="linkTitle"><A href='#' ><Img src={elips} /></A></Div>
+                        </Div>
+                
+                        <Div className='body_Search-Backlog'>
+                        <Div className='bodyForm'>
+                            <Form className='inputBacklogr bodyForm-Item'>
+                            <Label htmlFor='idSearchBacklog'>
+                                <A href='#'><Img src={magnifier} className='magnifierBacklog' /></A>
+                                <Input type='text' className='inputSearchBacklog' id='idSearch' placeholder='Пошук по беклогу' />
+                            </Label>
+                            </Form>
             
-                        <Div className='bodyTitleTasks'>
-                            <Div className='titleTasts'><Img src={arrowB} className='iconEpic' /><strong> SCT Sprint 1</strong>&#32;&#32;   10 May - 24 May (17 issues)</Div>
-                            <Div className='right-Block'>
-                            <Div className='body_Zero'>
-                                <P className='grey_Zero'>0</P>
-                                <P className='blue_Zero'>0</P>
-                                <P className='green_Zero'>0</P>
-                            </Div>
-
-                            <ModalAddTask />
-                            <Div className="linkTitleTasks"><A href='#' ><Img src={elips} /></A></Div>
+                            <Div className='bodyForm-Item'>
+                                <P className='epic'>Епік <Img src={arrow} className='iconEpic' /></P>
                             </Div>
                         </Div>
-                        <Div className="body_task">
-                        {/* <ModalComment  idTask={task.id}  titleTask={task.name} />  <Link to={{pathname: `/projects/jira/ModalComment` ,state: {idTask: task.id,titleTask: task.name,},}}><Img src={pencil} className='imgUpdate' /></Link>*/}
-                            { tasks.length > 0 ? (
-                                tasks.map(task => (
-                                    <Div className='task' variant="primary" key={task.id} onMouseEnter={() =>  handleTaskClick(task.id)}>
-                                        <Div className='left-BlockTast'>
-                                            <input type="checkbox" className="form-check-input item-leftBlock" id="exampleCheck1" />
-                                            <P className='numberSprint item-leftBlock'>SCT-{task.id}</P>
-                                            <P className='numberSprint item-leftBlock'>{task.name}</P>
-                                            <P className="modalDetails"><ModalComment taskIdOnClick={taskId}  idTask={task.id}  titleTask={task.name} comments={task.comments} assigneds={task.assigneds} creator={task.user} /></P> 
-                                        </Div>
-                                        <Div className='right-BlockTask'>
-                                            <P className='quintitu item-rightBlock'>-</P>
-                                            <Div className='bodyStatus' style={statusColors[task.status.name]}>
-                                                <p className="statusBlock">{task.status.name}</p>
+                        <Div>
+                            <P className='statistic'><Img src={analitic} /> Статистика</P>
+                        </Div>
+                        </Div>
+                        <Div className='body_Tasks'>
+                
+                            <Div className='bodyTitleTasks'>
+                                <Div className='titleTasts'><Img src={arrowB} className='iconEpic' /><strong> SCT Sprint 1</strong>&#32;&#32;   10 May - 24 May (17 issues)</Div>
+                                <Div className='right-Block'>
+                                <Div className='body_Zero'>
+                                    <P className='grey_Zero'>0</P>
+                                    <P className='blue_Zero'>0</P>
+                                    <P className='green_Zero'>0</P>
+                                </Div>
+
+                                <ModalAddTask status={status} />
+                                <Div className="linkTitleTasks"><A href='#' ><Img src={elips} /></A></Div>
+                                </Div>
+                            </Div>
+                            <Div className="body_task">
+                            {/* <ModalComment  idTask={task.id}  titleTask={task.name} />  <Link to={{pathname: `/projects/jira/ModalComment` ,state: {idTask: task.id,titleTask: task.name,},}}><Img src={pencil} className='imgUpdate' /></Link>*/}
+                                { tasks.length > 0 ? (
+                                    tasks.map(task => (
+                                        <Div className='task' variant="primary" key={task.id} onMouseEnter={() =>  handleTaskClick(task.id)}>
+                                            <Div className='left-BlockTast'>
+                                                <input type="checkbox" className="form-check-input item-leftBlock" id="exampleCheck1" />
+                                                <P className='numberSprint item-leftBlock'>SCT-{task.id}</P>
+                                                <P className='numberSprint item-leftBlock'>{task.name}</P>
+                                                <P className="modalDetails"><ModalComment status={status}  taskIdOnClick={taskId} users={user}  idTask={task.id}  titleTask={task.name} comments={task.comments} assigneds={task.assigneds} creator={task.user} /></P> 
                                             </Div>
-                                            <Div className='body_ImgProfile item-rightBlock'>
-                                                <span className='buttonAssigned'onMouseEnter={() => setHoveredState(task.id, true)} // Встановлюємо isHovered в true при наведенні
-                                                    onMouseLeave={() => setHoveredState(task.id, false)}>
-                                                    Виконавці:
-                                                    {hoveredStates[task.id] && (
-                                                    <Div className="body_ModalAssigned " >
-                                                        <span className="modalArrowUp"></span>
-                                                        {task.assigneds.map(assigned => (
-                                                            <Div className="assigned" key={assigned.id}
-                                                                onMouseEnter={() => {handleMouseEnter(assigned.id);
-                                                                                    handleAssigneHover(assigned.id)
+                                            <Div className='right-BlockTask'>
+                                                <P className='quintitu item-rightBlock'>-</P>
+                                                <Div className='bodyStatus' style={statusColors[task.status.name]}>
+                                                    <p className="statusBlock">{task.status.name}</p>
+                                                </Div>
+                                                <Div className='body_ImgProfile item-rightBlock'>
+                                                    <span className='buttonAssigned'onMouseEnter={() => setHoveredState(task.id, true)} // Встановлюємо isHovered в true при наведенні
+                                                        onMouseLeave={() => setHoveredState(task.id, false)}>
+                                                        Виконавці:
+                                                        {hoveredStates[task.id] && (
+                                                        <Div className="body_ModalAssigned " >
+                                                            <span className="modalArrowUp"></span>
+                                                            {task.assigneds.map(assigned => (
+                                                                <Div className="assigned" key={assigned.id}
+                                                                    onMouseEnter={() => {handleMouseEnter(assigned.id);
+                                                                                        handleAssigneHover(assigned.id)
+                                                                        }
                                                                     }
-                                                                }
-                                                                onMouseLeave={() => handleMouseLeave(assigned.id)}>
-                                                                <Div className="body_assignedAvatar">
-                                                                    <Img src={`${baseUrl}${assigned.user_avatar}`} className="assignedAvatar" alt="assignedAvatar" />
+                                                                    onMouseLeave={() => handleMouseLeave(assigned.id)}>
+                                                                    <Div className="body_assignedAvatar">
+                                                                        <Img src={`${baseUrl}${assigned.user_avatar}`} className="assignedAvatar" alt="assignedAvatar" />
+                                                                    </Div>
+                                                                    <Div className="assigned_name">
+                                                                        <P>{assigned.name}</P>
+                                                                    </Div>
+                                                                    {isAddAssignVisible[assigned.id] && (
+                                                                    <Div className="deleteAssign" onClick={sendObjectToServer}>
+                                                                        <Img src={user_delete} className="user_delete" alt="user_delete" />
+                                                                    </Div>
+                                                                    )}
                                                                 </Div>
-                                                                <Div className="assigned_name">
-                                                                    <P>{assigned.name}</P>
-                                                                </Div>
-                                                                {isAddAssignVisible[assigned.id] && (
-                                                                <Div className="deleteAssign" onClick={sendObjectToServer}>
-                                                                    <Img src={user_delete} className="user_delete" alt="user_delete" />
-                                                                </Div>
-                                                                )}
-                                                            </Div>
-                                                        ))}
-                                                        <hr />
-                                                        <ModalAddAssigneds taskId={taskId}/>
-                                                    </Div>
-                                                )}
-                                                </span>
-                                                
+                                                            ))}
+                                                            <hr />
+                                                            <ModalAddAssigneds taskId={taskId}/>
+                                                        </Div>
+                                                    )}
+                                                    </span>
+                                                    
+                                                </Div>
+                                                <button className='deleteTask' onClick={deleteTasks}  >
+                                                    <Img src={deleteTask} className="deleteTaskIcon"/>
+                                                </button>
                                             </Div>
-                                            <button className='deleteTask' onClick={deleteTasks}  >
-                                                <Img src={deleteTask} className="deleteTaskIcon"/>
-                                            </button>
                                         </Div>
-                                    </Div>
-                                ))
-                            ) : (
-                                <Div style={{fontSize: '28px'}}><center>Loading...</center></Div>
-                            )}
+                                    ))
+                                ) : (
+                                    <Div style={{fontSize: '28px'}}><center>Loading...</center></Div>
+                                )}
+                            </Div>
                         </Div>
                     </Div>
                 </Div>
-            </Div>
-        </LayoutInside>
+            </LayoutInside>
         </>
     );
 }

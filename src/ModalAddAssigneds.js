@@ -103,10 +103,6 @@ export default function ModalAddAssigneds ({style, showModal, closeModal, taskId
 
 //* --------------------------------------------------------Відправка даних про додавання юзера на сервер
 
-
-
-
-
         useEffect(() => {
             axios
             .get(`http://127.0.0.1:8000/api/users`)
@@ -128,9 +124,6 @@ export default function ModalAddAssigneds ({style, showModal, closeModal, taskId
                 console.error(error);
             });
         }, []);
-
-
-
 
 
     return(

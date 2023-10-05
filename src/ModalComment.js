@@ -38,7 +38,7 @@ import axios from "axios";
 
 
 
-export default function ModalComment ({idTask, titleTask, comments, assigneds, creator, taskIdOnClick}){
+export default function ModalComment ({idTask, titleTask, status, users, comments, assigneds, creator, taskIdOnClick}){
 
     const baseUrl = "http://127.0.0.1:8000/storage/avatars/"; // Аватарки
 
@@ -94,18 +94,19 @@ export default function ModalComment ({idTask, titleTask, comments, assigneds, c
         setIsOpen(!isOpen);
     };
 
-    const [users, setUsers] = useState([]);
+    // const [users, setUsers] = useState([]);
 
-    useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/api/users`)
-            .then(response => {
-                setUsers(response.data.response.users.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+    // useEffect(() => {
+        
+    //     axios
+    //         .get(`http://127.0.0.1:8000/api/users`)
+    //         .then(response => {
+    //             setUsers(response.data.response.users.data);
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // }, [show]);
 
 function formatDate(apiDate) {
     const date = new Date(apiDate);
@@ -136,23 +137,23 @@ function formatDate(apiDate) {
         status_id: idUpdateStatus,
     }
 
-    useEffect(()=> {
-        console.log(idUpdateStatus);
-        console.log(updateNameTask);
-    }, [idUpdateStatus, updateNameTask])
+    // useEffect(()=> {
+    //     console.log(idUpdateStatus);
+    //     console.log(updateNameTask);
+    // }, [idUpdateStatus, updateNameTask])
 
 
-    useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/api/status`)
-            .then(response => {
-                setUpdateStatus(response.data.response.status.data);
-                console.log(response.data.response.status.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, [updateStatus]);
+    // useEffect(() => {
+    //     axios
+    //         .get(`http://127.0.0.1:8000/api/status`)
+    //         .then(response => {
+    //             setUpdateStatus(response.data.response.status.data);
+    //             console.log(response.data.response.status.data);
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // }, [showInputUpdate]);
 
     const sendUpdatedDataTask = () => {
             if(updateNameTask && idCreatorTasak && idUpdateStatus){
@@ -193,7 +194,7 @@ function formatDate(apiDate) {
                         <P className="idTaskModal_AddEpic" style={{margin: "0", marginRight: "15px"}}><Span>&#128394;&#65039;</Span> Add epic</P> /  
                         {/* <Img src={}/> */}
                         <form>
-                            <Input type="checkbox" id="inputIdModal"></Input>
+                            <Input type="checkbox" id="inputIdModal" ></Input>
                             <Label htmlFor="idTaskModal_input">
                                 SCT - {idTask}
                             </Label>
@@ -378,9 +379,9 @@ function formatDate(apiDate) {
                         <Div className="statusTaskActions">
                             {showInputUpdate ? (
                                     <select className="selectUpateTask" id="status_id" onChange={(e) => setIdUpdateStatus(e.target.value)}>
-                                        <option id="status_id" disabled="true" selected>Виберіть статус таску</option>
-                                        {updateStatus && updateStatus.map(status =>(
-                                            <option id="status_id" value={status.id} >{status.name}</option>
+                                        <option id="status_id" value="option1d" key='1d' disabled={true} selected>Виберіть статус таску</option>
+                                        {status && status.map(stat =>(
+                                            <option id="status_id" key={stat.id} value={stat.id} >{stat.name}</option>
                                         ))}
                                     </select>
                             ) : (

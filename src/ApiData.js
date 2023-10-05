@@ -1,13 +1,12 @@
-import React, { createContext, useContext, useState, useEffect } from "react";
-import HeaderInside from "../components/header/HeaderInside";
-import Main1nside from "../components/main/Main1nside";
-import axios from "axios";
-// import Sidebar from "../components/main/Sidebar/Sidebar";
+// import React, { createContext, useContext, useState, useEffect } from "react";
+// import LayoutInside from "./layaut/LayoutInside";
+// import axios from "axios";
+// // import Sidebar from "../components/main/Sidebar/Sidebar";
 
 // export const ApiDataContext = createContext();
 
 
-export default function LayoutInside ({children}){
+// export default function ApiData ({children}){
 
 //     const [tasks, setTasks] = useState([]);
 
@@ -60,15 +59,13 @@ export default function LayoutInside ({children}){
 //             });
 // }, []);
 
-    return(
-        <>
-            {/* <ApiDataContext.Provider value={{tasks, user, assigned, status}}> */}
-                <HeaderInside/>
-                    <Main1nside>
-                        {children}
-                    </Main1nside>
-            {/* </ApiDataContext.Provider> */}
-
-        </>
-    )
-}
+//     return(
+//         <>
+//             <ApiDataContext.Provider value={{tasks, user, assigned, status}}>
+//                 <LayoutInside>
+//                     {children}
+//                 </LayoutInside>
+//             </ApiDataContext.Provider>
+//         </>
+//     )
+// }

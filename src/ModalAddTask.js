@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect,useContext, useState} from "react";
 import "./layaut/ModalAddTask.css"
 import Div from "./elements/Div";
 import P from "./elements/P";
@@ -8,13 +8,21 @@ import axios from "axios";
 import Label from "./elements/Label";
 import Input from "./elements/Input";
 import Form from "./elements/Form";
+import { ApiDataContext } from "./App";
 
 
 
-export default function ModalAddTask ({}){
+export default function ModalAddTask ({status}){
+
+    // const contextAddTask = useContext(ApiDataContext);
+
+    // const status = contextAddTask.status
+
+    // console.log(status);
+    
     const [showModalCreateTask, setShowModalCreateTask] = useState(false)
 
-    const [status, setStatus] = useState();
+    // const [status, setStatus] = useState();
 
     const [descriptionTask, setDescriptionTask] = useState('');
 
@@ -28,17 +36,17 @@ export default function ModalAddTask ({}){
         console.log(idCreatorTasak);
     }, [descriptionTask, statusTask])
 
-    useEffect(() => {
-        axios
-            .get(`http://127.0.0.1:8000/api/status`)
-            .then(response => {
-                setStatus(response.data.response.status.data);
-                console.log(response.data.response.status.data);
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    }, []);
+    // useEffect(() => {
+    //     axios
+    //         .get(`http://127.0.0.1:8000/api/status`)
+    //         .then(response => {
+    //             setStatus(response.data.response.status.data);
+    //             console.log(response.data.response.status.data);
+    //         })
+    //         .catch(error => {
+    //             console.error(error);
+    //         });
+    // }, []);
 
     const sendDataObject = {
         name: descriptionTask,
@@ -51,7 +59,7 @@ const createTask = () => {
     if(descriptionTask && idCreatorTasak && statusTask){
         axios.post(`http://127.0.0.1:8000/api/task`, sendDataObject)
         .then(response => {
-            console.log('Дані було успішно видалено');
+            console.log('Таск було успішно створено');
         })
         .catch(error => {
             console.error('Помилка при відправці даних на сервер:', error);
@@ -92,9 +100,9 @@ const createTask = () => {
                     <Form>
                         <Label className="labelEnterTaskName" htmlFor="status_id">Статус</Label>
                         <select className="selectModalAddTask" id="status_id" onChange={(e) => setStatusTask(e.target.value)}>
-                            <option id="status_id" disabled="true" selected>Виберіть статус таску</option>
+                            <option id="status_id" value="option1d" key='1d' disabled={true} selected>Виберіть статус таску</option>
                             {status && status.map(stat =>(
-                                <option id="status_id" value={stat.id} >{stat.name}</option>
+                                <option id="status_id"  value={stat.id}  key={stat.id}  >{stat.name}</option>
                             ))}
                         </select>
                         <Input className="inputEnterTaskUser" id="user_id" value="1" type="hidden" />

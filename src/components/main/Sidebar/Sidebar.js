@@ -65,25 +65,25 @@ export default function Sidebar ({ setAnimateContent }) {
                         </Div>
                         <Div className={` planesSidbar ${svipe ? 'padNon' : ''}`}>
                             <h3 className={` titleBlock ${svipe ? 'svipeDisplayNone' : ''}`}>Планування</h3>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item" ><Link to="/projects" className={linkSidebarActive}><Img src={cart} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Проекти</span></Link></li>
-                                <li class="list-group-item" ><Link to="/projects" className={linkSidebarActive}><Img src={backlog} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Беклог</span></Link></li>
-                                <li class="list-group-item" ><Link to="/projects" className={linkSidebarActive}><Img src={board} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Дошка</span></Link></li>
+                            <ul className="list-group list-group-flush">
+                                <li className="list-group-item" ><Link to="/projects" className={linkSidebarActive}><Img src={cart} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Проекти</span></Link></li>
+                                <li className="list-group-item" ><Link to="/projects" className={linkSidebarActive}><Img src={backlog} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Беклог</span></Link></li>
+                                <li className="list-group-item" ><Link to="/projects" className={linkSidebarActive}><Img src={board} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Дошка</span></Link></li>
                             </ul>
                         </Div>
                         <hr/>
                         <Div className={` planesSidbar secondPlanesSidbar ${svipe ? 'padNon' : ''}`}>
                             <h3 className={` titleBlock ${svipe ? 'svipeDisplayNone' : ''}`}>Розробка</h3>
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item" style={{borderBottom:'none'}}><A href='#' className={linkSidebarActive}><Img src={code} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Код</span></A></li>
+                            <ul className="list-group list-group-flush">
+                                <li className="list-group-item" style={{borderBottom:'none'}}><A href='#' className={linkSidebarActive}><Img src={code} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Код</span></A></li>
                             </ul>
                         </Div>
                         <hr/>
                         <Div className={` planesSidbar ${svipe ? 'padNon' : ''}`}>
-                            <ul class="list-group list-group-flush" >
-                                <li class="list-group-item" style={{borderBottom:'none'}}><A href='#' className={linkSidebarActive}><Img src={stProject} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Сторінка проекту</span></A></li>
-                                <li class="list-group-item" style={{borderBottom:'none'}}><A href='#' className={linkSidebarActive}><Img src={addLanguage} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Додати ярлик</span></A></li>
-                                <li class="list-group-item" style={{borderBottom:'none'}}><A href='#' className={linkSidebarActive}><Img src={settings} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Налагодження пректу</span></A></li>
+                            <ul className="list-group list-group-flush" >
+                                <li className="list-group-item" style={{borderBottom:'none'}}><A href='#' className={linkSidebarActive}><Img src={stProject} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Сторінка проекту</span></A></li>
+                                <li className="list-group-item" style={{borderBottom:'none'}}><A href='#' className={linkSidebarActive}><Img src={addLanguage} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Додати ярлик</span></A></li>
+                                <li className="list-group-item" style={{borderBottom:'none'}}><A href='#' className={linkSidebarActive}><Img src={settings} className = {`${svipeMenuIMgCenter}`}/><span className={` ${svipe ? 'svipeDisplayNone' : ''}`}>Налагодження пректу</span></A></li>
                             </ul>
                         </Div>
                     </Div>
