@@ -25,6 +25,8 @@ function App() {
 
     const [status, setStatus] = useState();
 
+    const [comments, setСomments] = useState([]);
+
 
     useEffect(() => {
         axios
@@ -67,6 +69,17 @@ function App() {
             .catch(error => {
                 console.error(error);
             });
+            
+            axios
+            .get(`http://127.0.0.1:8000/api/comment`)
+            .then(response => {
+                setСomments(response.data.response.comment.data);
+                // console.log(response.data.response.status.data);
+                setDataLoaded(true);
+                })
+            .catch(error => {
+                console.error(error);
+            });
     }, []);
 
     if (!dataLoaded) {
@@ -75,7 +88,7 @@ function App() {
 
     return (
         <>
-            <ApiDataContext.Provider value={{tasks, user, assigned, status}}>
+            <ApiDataContext.Provider value={{tasks, user, assigned, status, comments}}>
                 <BrowserRouter>
                     <Routes>
                         <Route path='/' element={ <HomeLogIn />} />

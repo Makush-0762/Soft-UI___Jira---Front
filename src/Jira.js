@@ -41,8 +41,11 @@ export default function Jira() {
     const assigned = context.assigned;
 
     const user = context.user;
-
+    
     const status = context.status;
+    
+    const comment = context.comments;
+
     
     const [hoveredStates, setHoveredStates] = useState({});
 
@@ -296,7 +299,7 @@ export default function Jira() {
                                                 <input type="checkbox" className="form-check-input item-leftBlock" id="exampleCheck1" />
                                                 <P className='numberSprint item-leftBlock'>SCT-{task.id}</P>
                                                 <P className='numberSprint item-leftBlock'>{task.name}</P>
-                                                <P className="modalDetails"><ModalComment status={status}  taskIdOnClick={taskId} users={user}  idTask={task.id}  titleTask={task.name} comments={task.comments} assigneds={task.assigneds} creator={task.user} /></P> 
+                                                <P className="modalDetails"><ModalComment status={status} aktualyStatus={task.status.name} taskIdOnClick={taskId} users={user}  idTask={task.id}  titleTask={task.name} comments={comment} assigneds={task.assigneds} creator={task.user} /></P> 
                                             </Div>
                                             <Div className='right-BlockTask'>
                                                 <P className='quintitu item-rightBlock'>-</P>

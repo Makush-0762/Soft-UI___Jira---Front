@@ -33,14 +33,16 @@ import pencil from "./img/pencil.svg"
 import settings from "./img/setting.png"
 import edit_task from "./img/edit-task.png"
 import send_update_task from "./img/send_update_task.png"
+import send from "./img/send.png"
 import axios from "axios";
 // import Select from 'react-select'
 
 
 
-export default function ModalComment ({idTask, titleTask, status, users, comments, assigneds, creator, taskIdOnClick}){
+export default function ModalComment ({idTask, titleTask, status, users, comments, assigneds, creator, taskIdOnClick, aktualyStatus}){
 
-    const baseUrl = "http://127.0.0.1:8000/storage/avatars/"; // Аватарки
+    const baseUrl = "http://127.0.0.1:8000/storage/avatars/";
+     // Аватарки
 
     const [show, setShow] = useState(false);
 
@@ -54,6 +56,10 @@ export default function ModalComment ({idTask, titleTask, status, users, comment
 
     const [isEditorVisibleInp, setIsEditorVisibleInp] = useState(false);
 
+    // console.log(aktualyStatus);
+
+    const filtComment = comments.filter(comment => comment.task_id === idTask);
+    // console.log(filtComment);
 
     const toggleEditorAndInput = () => {
         setIsEditorVisibleInp(!isEditorVisibleInp);
@@ -79,8 +85,6 @@ export default function ModalComment ({idTask, titleTask, status, users, comment
         setShowParagpaph(!showParagpaph);
     };
 
-    const [task, setTask] = useState([]);
-
     const editorRef = useRef(null);
     const log = () => {
     if (editorRef.current) {
@@ -94,20 +98,6 @@ export default function ModalComment ({idTask, titleTask, status, users, comment
         setIsOpen(!isOpen);
     };
 
-    // const [users, setUsers] = useState([]);
-
-    // useEffect(() => {
-        
-    //     axios
-    //         .get(`http://127.0.0.1:8000/api/users`)
-    //         .then(response => {
-    //             setUsers(response.data.response.users.data);
-    //         })
-    //         .catch(error => {
-    //             console.error(error);
-    //         });
-    // }, [show]);
-
 function formatDate(apiDate) {
     const date = new Date(apiDate);
     const year = date.getFullYear();
@@ -118,10 +108,24 @@ function formatDate(apiDate) {
     return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
 
+const statusColors = {
+    "До виконання": {
+                        color: "#797979"
+                    },
+    "В роботі": {
+                        color: "#dec400"
+                    },
+    "Тестовий таск": {
+                        color: "#9300ad"
+                    },
+    "Готово": {
+                        color: "#00b55d"
+                    },
+};
+
+
 //** ---------------------------------------------------Вся процедура реадагуваня таску */
     const [showIconUpdate, setShowIconUpdate] = useState(false);
-
-    const [updateStatus, setUpdateStatus] = useState(); //? Те що прийщло із АПІ
 
     const [showInputUpdate, setShowInputUpdate] = useState(false);
 
@@ -129,35 +133,30 @@ function formatDate(apiDate) {
 
     const [updateNameTask, setUpdateNameTask] = useState("");
 
+    const [createComment, setCreateComment] = useState();
+
+    const [updateCommentStates, setUpdateCommentStates] = useState({});
+
     const idCreatorTasak = 1;
 
-    const sendDataObject = {
+    const sendDataTaskUpdObject = {
         name: updateNameTask,
         user_id: idCreatorTasak,
         status_id: idUpdateStatus,
     }
 
-    // useEffect(()=> {
-    //     console.log(idUpdateStatus);
-    //     console.log(updateNameTask);
-    // }, [idUpdateStatus, updateNameTask])
 
 
-    // useEffect(() => {
-    //     axios
-    //         .get(`http://127.0.0.1:8000/api/status`)
-    //         .then(response => {
-    //             setUpdateStatus(response.data.response.status.data);
-    //             console.log(response.data.response.status.data);
-    //         })
-    //         .catch(error => {
-    //             console.error(error);
-    //         });
-    // }, [showInputUpdate]);
+    useEffect(()=> {
+        // console.log(idUpdateStatus);
+        // console.log(updateNameTask);
+        console.log(createComment);
+    }, [createComment])
+
 
     const sendUpdatedDataTask = () => {
             if(updateNameTask && idCreatorTasak && idUpdateStatus){
-                axios.post(`http://127.0.0.1:8000/api/task?id=${taskIdOnClick}`, sendDataObject)
+                axios.post(`http://127.0.0.1:8000/api/task?id=${taskIdOnClick}`, sendDataTaskUpdObject)
                 .then(response => {
                     console.log('Дані було успішно редаговано');
                 })
@@ -169,13 +168,78 @@ function formatDate(apiDate) {
                 },1500)
             }   else {
                 alert('Ви ввели не всі дані');
-                // setTimeout(()=>{
-                //     window.location.reload(true)
-                // },1000)
+            }
+    }
+
+    const sendDataCommCreatObject ={
+        description: createComment,
+        user_id: idCreatorTasak,
+        task_id: taskIdOnClick,
+    }
+    
+    const sendCreateComment = () => {
+            if(createComment && idCreatorTasak && taskIdOnClick){
+                axios.post(`http://127.0.0.1:8000/api/comment`, sendDataCommCreatObject)
+                .then(response => {
+                    console.log('Комент успішно створено');
+                })
+                .catch(error => {
+                    console.error('Помилка при відправці даних на сервер:', error);
+                });
+                setTimeout(()=>{
+                    window.location.reload(true)
+                },1500)
+            }   else {
+                alert('Ви ввели не всі дані');
             }
     }
 
 
+    const [modalDeleteComment, setModalDeleteComment] = useState({});
+    // const actualuIdComment = 
+
+    const sendDataCommUpdateObject ={
+        description: createComment,
+        user_id: idCreatorTasak,
+        task_id: taskIdOnClick,
+    }
+
+    const [actualyCommentId, setActualyCommentId] = useState();
+    // console.log(actualyCommentId);
+    
+    const sendUpdateComment = () => {
+            if(createComment && idCreatorTasak && taskIdOnClick){
+                axios.post(`http://127.0.0.1:8000/api/comment?id=${actualyCommentId}`, sendDataCommUpdateObject)
+                .then(response => {
+                    console.log('Комент успішно Редаговано');
+                })
+                .catch(error => {
+                    console.error('Помилка при відправці даних на сервер:', error);
+                });
+                setTimeout(()=>{
+                    window.location.reload(true)
+                },1500)
+            }   else {
+                alert('Ви ввели не всі дані');
+            }
+    }
+    
+    const deleteComment = () => {
+            if(actualyCommentId){
+                axios.post(`http://127.0.0.1:8000/api/comment?deleteId=${actualyCommentId}`)
+                .then(response => {
+                    console.log('Комент успішно Видалено');
+                })
+                .catch(error => {
+                    console.error('Помилка при відправці даних на сервер:', error);
+                });
+                setTimeout(()=>{
+                    window.location.reload(true)
+                },1000)
+            }   else {
+                alert('Ви ввели не всі дані');
+            }
+    }
 
 
 //** ---------------------------------------------------Вся процедура реадагуваня таску */
@@ -217,7 +281,7 @@ function formatDate(apiDate) {
                                 onClick={() => {setShowIconUpdate(!showIconUpdate)}}>
                             {showInputUpdate ? (
                                     <Label className="labelUpdateTaskName" htmlFor="inputUpdateTaskName">
-                                        {titleTask} 
+                                        <b>Актуальний таск:</b> {titleTask} 
                                         <textarea className="inputUpdateTaskName" id="inputUpdateTaskName" onChange={(e) => setUpdateNameTask(e.target.value)}  /> 
                                     </Label>
                             ) : (
@@ -262,7 +326,7 @@ function formatDate(apiDate) {
                             </Div>
                             {isEditorVisible && 
                             ( <Div className="editorBody">                            
-                                    <Editor
+                                    {/* <Editor
                                         apiKey='gpwf6eadvyvdfj4xdak5u1oa685qqndjsqiyme2csvusjcpf'
                                         onInit={(evt, editor) => editorRef.current = editor}
                                         initialValue="<p>This is the initial content of the editor.</p>"
@@ -281,6 +345,13 @@ function formatDate(apiDate) {
                                         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
                                         }}
                                     />
+                                    <Div className="bodyBtnEdit">
+                                        <button className="btnEdit">Зберегти</button>
+                                        <button className="btnEdit" onClick={toggleEditorAndParagraph}>Скасувати</button>
+                                    </Div> */}
+                                    <Label className="LabeladdDescriptionTack" htmlFor="inputUpdateTaskName">
+                                        <textarea className="addDescriptionTack" id="addDescriptionTack" onChange={(e) => setUpdateNameTask(e.target.value)}  /> 
+                                    </Label>
                                     <Div className="bodyBtnEdit">
                                         <button className="btnEdit">Зберегти</button>
                                         <button className="btnEdit" onClick={toggleEditorAndParagraph}>Скасувати</button>
@@ -308,18 +379,23 @@ function formatDate(apiDate) {
                         </Div>
 
                         <Div  style={{paddingTop: "15px"}}>
-                            <Div className={`addComment ${showInput ? "" : "addComment_none"} `} >
+                            <Div className='addComment' >
+                            {/* <Div className={`addComment ${showInput ? "" : "addComment_none"} `} > */}
                                 <Div className="addComment_BodyImgUser">
                                     <Img src={profile} className="imgUser" />
                                 </Div>
                                 <Div className="addComment_inputComm">
                                     <Form className="addComment_form">
-                                        <Input type="text" className="addComment_input" id="idAddComment_input" value="" placeholder="Додати коментар.." onClick={toggleEditorAndInput}/>
-                                        <Label className="addComment_label" htmlFor="idAddComment_input"><storong>Порада :</storong> натисніть <span><strong>M</strong></span>, щоб додати коментар</Label>
+                                        {/* <Input type="text" className="addComment_input" id="idAddComment_input" value="" placeholder="Додати коментар.." onClick={toggleEditorAndInput}/> */}
+                                        <Label className="addComment_label" htmlFor="idAddComment_input">
+                                            <Img src={send} className="iconSendCommentTask" alt="sendComment" onClick={sendCreateComment}/>
+                                            <Input type="text" className="addComment_input" id="idAddComment_input"  onChange={(e) => setCreateComment(e.target.value)} placeholder="Додати коментар.."/>
+                                            <storong>Порада:</storong> натисніть <span><strong>M</strong></span>, щоб додати коментар
+                                        </Label>
                                     </Form>
                                 </Div>
                             </Div>
-                            {isEditorVisibleInp && 
+                            {/* {isEditorVisibleInp && 
                             ( <Div className="editorBody">                            
                                     <Editor
                                         apiKey='gpwf6eadvyvdfj4xdak5u1oa685qqndjsqiyme2csvusjcpf'
@@ -344,12 +420,19 @@ function formatDate(apiDate) {
                                         <button className="btnEdit">Зберегти</button>
                                         <button className="btnEdit" onClick={toggleEditorAndInput}>Скасувати</button>
                                     </Div>
-                                </Div> )}
+                                    <Label className="LabeladdDescriptionTack" htmlFor="inputUpdateTaskName">
+                                        <textarea className="addDescriptionTack" id="addDescriptionTack" onChange={(e) => setUpdateNameTask(e.target.value)}  /> 
+                                    </Label>
+                                    Div className="bodyBtnEdit">
+                                        <button className="btnEdit">Зберегти</button>
+                                        <button className="btnEdit" onClick={toggleEditorAndInput}>Скасувати</button>
+                                    </Div> 
+                                </Div> )} */}
                         </Div>
 
-                        {comments && comments.length > 0 ? (
-                            comments.map((comment) => {
-                                const user = users.find(user => user.id === comment.user_id);
+                        {filtComment && filtComment.length > 0 ? (
+                            filtComment.map((comment) => {
+                                const user = users.find((user) => user.id === comment.user_id);
                                 return (
                                     <Div className="commentItem" key={comment.id}>
                                         <Div className="addComment_BodyImgUser">
@@ -360,11 +443,46 @@ function formatDate(apiDate) {
                                                 <P className="commF_userDetails userName">{user ? user.name : 'АНОНІМ'}</P>
                                                 <P className="commF_userDetails timePublicate">{formatDate(comment.created_at)}</P>
                                             </Div>
-                                            <Div className="commF_comment"><b>{comment.description}</b></Div>
+                                            <Div className="commF_comment">
+                                                {updateCommentStates && updateCommentStates[comment.id] ? (
+                                                    <Label className="addComment_label updComm" htmlFor="idAddComment_input">
+                                                        <b>Актуальний коментар:</b> {comment.description} 
+                                                        <Img src={send} className="iconSendCommentTask icnUpdComm" alt="sendComment" onClick={sendUpdateComment}/>
+                                                        <Input type="text" className="addComment_input" id="idAddComment_input"  onChange={(e) => setCreateComment(e.target.value)} placeholder="Додати коментар.."/>
+                                                        <storong>Порада:</storong> натисніть <span><strong>M</strong></span>, щоб додати коментар
+                                                    </Label>
+                                                ) : (
+                                                    <b>{comment.description}</b>
+                                                )}
+                                                
+                                            </Div>
                                             <Div className="commF_changeComm">
-                                                <span className="changeComm_item chanComm_Edit">Змінити</span>
-                                                <span className="changeComm_item chanComm_Delete">Видалити</span>
+                                                <span className="changeComm_item chanComm_Edit" onClick={() => setUpdateCommentStates(prevState => ({
+                                                        ...prevState,
+                                                        [comment.id]: !prevState[comment.id]
+                                                    }))}>{updateCommentStates && updateCommentStates[comment.id] ? 'Припинити редагування' : 'Змінити'}</span>
+                                                <span className="changeComm_item chanComm_Delete" onClick={() => {
+                                                        setModalDeleteComment(prevState => ({
+                                                            ...prevState,
+                                                            [comment.id]: true
+                                                        }));
+                                                        setActualyCommentId(comment.id)
+                                                    }}>Видалити </span>
                                                 <span className="changeComm_item chanComm_BodyImg"><Img className="chanComm_iconReaction" src={smile}/></span>
+                                                {modalDeleteComment[comment.id] && (
+                                                    <Div className="doYouWontDelete">
+                                                        <span className="doYWntDlt_question">Ви дійсно хочете видалити коментар?</span> 
+                                                        <span className="doYWntDlt_button">
+                                                            <b onClick={deleteComment}>Так</b>
+                                                            <b onClick={() => {
+                                                                setModalDeleteComment(prevState => ({
+                                                                    ...prevState,
+                                                                    [comment.id]: false
+                                                                }));
+                                                            }}>Ні</b>
+                                                        </span>
+                                                    </Div>
+                                                )}
                                             </Div>
                                         </Div>
                                     </Div>
@@ -378,12 +496,14 @@ function formatDate(apiDate) {
                     <Div className="blockDetails">
                         <Div className="statusTaskActions">
                             {showInputUpdate ? (
-                                    <select className="selectUpateTask" id="status_id" onChange={(e) => setIdUpdateStatus(e.target.value)}>
-                                        <option id="status_id" value="option1d" key='1d' disabled={true} selected>Виберіть статус таску</option>
-                                        {status && status.map(stat =>(
-                                            <option id="status_id" key={stat.id} value={stat.id} >{stat.name}</option>
-                                        ))}
-                                    </select>
+                                        <Label className="labelStatusTastCommModd" htmlFor="status_id" value={aktualyStatus}><b>Актуальний статус:</b> <span style={statusColors[aktualyStatus]}>{aktualyStatus}</span>
+                                            <select className="selectUpateTask" id="status_id" onChange={(e) => setIdUpdateStatus(e.target.value)}>
+                                                <option id="status_id" value="option1d" key='1d' disabled={true} selected>Виберіть статус таску</option>
+                                                {status && status.map(stat =>(
+                                                    <option id="status_id" key={stat.id} value={stat.id} >{stat.name}</option>
+                                                ))}
+                                            </select>
+                                        </Label>
                             ) : (
                                     <P className="statTaskAct">В роботі <Img className="imgDropButton" src={arrowB}/></P>
                             )}
@@ -399,7 +519,7 @@ function formatDate(apiDate) {
                                     <table className="tableAccordion" width="100%">
                                         <tr>
                                             <td><span style={{fontWeight: "600"}}>Виконавець/і</span></td>
-                                            <td>{assigneds.map(assigned => (<span className="bodyAssignedAvatar"><Img className="assignedAvatar" src={`${baseUrl}${assigned.user_avatar}`}/> {assigned.name} </span>))} <P className="addAsegnee"> Додати виконавця</P></td>
+                                            <td>{assigneds.map(assigned => (<span className="bodyAssignedAvatar" key={assigned.id}><Img className="assignedAvatar" src={`${baseUrl}${assigned.user_avatar}`}/> {assigned.name} </span>))} <P className="addAsegnee"> Додати виконавця</P></td>
                                         </tr> 
                                         <tr>
                                             <td><span style={{fontWeight: "600"}}>Нотатки</span></td>
